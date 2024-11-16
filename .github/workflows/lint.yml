@@ -30,10 +30,13 @@ jobs:
       continue-on-error: true
       run: |
         flake8 app
+        flake8 CruceDSalas
 
     - name: Format with black
       run: |
         black app
+        black CruceDSalas
+
 
     - name: Check for changes
       id: git_diff
