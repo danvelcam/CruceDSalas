@@ -1,0 +1,38 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CruceDSalas - Página Inicial{% endblock %}
+
+{% block content %}
+    <style>
+        .main-content a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #16748c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .main-content a:hover {
+            background-color: #145a6e;
+        }
+    </style>
+    <h1>Bienvenido a CruceDSalas</h1>
+    <p>Esta es la página inicial de la aplicación de reservas de salas.</p>
+    <a href="{% url 'register' %}">Regístrate</a>
+    <a href="{% url 'login' %}">Inicia Sesión</a>
+{% endblock %}
+
+{% block auth_status %}
+    {% if user.is_authenticated %}
+        Bienvenido, {{ user.name }} {{ user.surname }}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Cerrar Sesión</button>
+        </form>
+    {% else %}
+        No autenticado
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,95 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}CruceDSalas{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #16748c;
+            color: white;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-container img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .logo-container a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .logo-container a:hover {
+            text-decoration: none; /* Evitar el subrayado al pasar el ratón por encima */
+        }
+        .auth-status {
+            margin-right: 20px;
+        }
+        .auth-status form {
+            display: inline;
+        }
+        .auth-status button {
+            background-color: #16748c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .auth-status button:hover {
+            background-color: #145a6e;
+        }
+        .main-content {
+            padding: 20px;
+            text-align: center;
+        }
+        .main-content h1 {
+            color: #16748c;
+        }
+        .main-content a, .auth-status button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #16748c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .main-content a:hover, .auth-status button:hover {
+            background-color: #145a6e;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <div class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo2.png' %}" alt="Logo de la Aplicación">
+            <img src="{% static 'images/escudo.png' %}" alt="Escudo del Ayuntamiento">
+            <a href="{% url 'home' %}">CruceDSalas</a>
+        </div>
+        <div class="auth-status">
+            {% block auth_status %}{% endblock %}
+        </div>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
