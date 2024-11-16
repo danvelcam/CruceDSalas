@@ -2,10 +2,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+
 class UserManager(BaseUserManager):
     def create_user(self, name, surname, email, dni):
         if not dni:
-            raise ValueError('Users must have a DNI')
+            raise ValueError("Users must have a DNI")
         user = self.model(
             name=name,
             surname=surname,
@@ -27,8 +28,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 class User(AbstractBaseUser):
-    id = models.AutoField(primary_key=True) 
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     email = models.EmailField(null=True)
@@ -36,8 +38,8 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'dni'
-    REQUIRED_FIELDS = ['name', 'surname', 'email']
+    USERNAME_FIELD = "dni"
+    REQUIRED_FIELDS = ["name", "surname", "email"]
 
     def __str__(self):
         return f"{self.name} {self.surname}"
