@@ -10,7 +10,7 @@ class NameDniBackend(BaseBackend):
                 return user
         except User.DoesNotExist:
             return None
-    
+
     def authenticate(self, request, dni=None, **kwargs):
         try:
             user = User.objects.get(dni=dni)
@@ -18,7 +18,6 @@ class NameDniBackend(BaseBackend):
                 return user
         except User.DoesNotExist:
             return None
-
 
     def get_user(self, user_id):
         try:

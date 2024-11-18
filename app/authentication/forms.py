@@ -22,9 +22,10 @@ class UserRegisterForm(forms.Form):
     surname = forms.CharField(label="Apellidos")
     dni = forms.CharField(label="DNI")
     email = forms.EmailField(label="Email")
-    tlf= forms.CharField(label="Teléfono")
-    accept_terms = forms.BooleanField(label="Acepto el almacenamiento de mis datos", required=True)
-
+    tlf = forms.CharField(label="Teléfono")
+    accept_terms = forms.BooleanField(
+        label="Acepto el almacenamiento de mis datos", required=True
+    )
 
     def clean_dni(self):
         dni = self.cleaned_data.get("dni")
@@ -47,16 +48,36 @@ class UserRegisterForm(forms.Form):
             surname=data.get("surname"),
             email=data.get("email"),
             dni=data.get("dni"),
-            tlf=data.get("tlf")
+            tlf=data.get("tlf"),
         )
 
-def _check_DNI(dni:str ) -> bool:
-        control_letter = {
-    0: 'T', 1: 'R', 2: 'W', 3: 'A', 4: 'G', 5: 'M', 6: 'Y', 7: 'F', 8: 'P', 9: 'D',
-    10: 'X', 11: 'B', 12: 'N', 13: 'J', 14: 'Z', 15: 'S', 16: 'Q', 17: 'V', 18: 'H', 19: 'L',
-    20: 'C', 21: 'K', 22: 'E'
-}
-        dni_letter = dni[-1]
-        dni_numbers = int(dni[:-1])
-        return control_letter[dni_numbers % 23] == dni_letter
 
+def _check_DNI(dni: str) -> bool:
+    control_letter = {
+        0: "T",
+        1: "R",
+        2: "W",
+        3: "A",
+        4: "G",
+        5: "M",
+        6: "Y",
+        7: "F",
+        8: "P",
+        9: "D",
+        10: "X",
+        11: "B",
+        12: "N",
+        13: "J",
+        14: "Z",
+        15: "S",
+        16: "Q",
+        17: "V",
+        18: "H",
+        19: "L",
+        20: "C",
+        21: "K",
+        22: "E",
+    }
+    dni_letter = dni[-1]
+    dni_numbers = int(dni[:-1])
+    return control_letter[dni_numbers % 23] == dni_letter

@@ -11,16 +11,17 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             dni = form.cleaned_data.get("dni")
-            user = authenticate(request,dni=dni)
+            user = authenticate(request, dni=dni)
             if user is not None:
                 msg = "Ya existe un usuario con ese DNI"
-                return render(request, "auth/register.html", {"form": form, 'msg': msg})
+                return render(request, "auth/register.html", {"form": form, "msg": msg})
             else:
                 form.save()
             return redirect("home")
     else:
         form = UserRegisterForm()
     return render(request, "auth/register.html", {"form": form})
+
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -37,7 +38,9 @@ def login_view(request):
                 return redirect("home")
             else:
                 error = "Usuario o contraseña incorrectos"
-                return render(request, "auth/login.html", {"form": form ,'error':error})
+                return render(
+                    request, "auth/login.html", {"form": form, "error": error}
+                )
     else:
         form = UserLoginForm()
     return render(request, "auth/login.html", {"form": form})

@@ -11,7 +11,7 @@ class UserManager(BaseUserManager):
             surname=surname,
             email=self.normalize_email(email),
             dni=dni,
-            tlf=tlf
+            tlf=tlf,
         )
         user.set_password(dni)  # Set the password to be the DNI
         user.save(using=self._db)
@@ -19,11 +19,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, name, surname, email, dni, tlf):
         user = self.create_user(
-            name=name,
-            surname=surname,
-            email=email,
-            dni=dni,
-            tlf=tlf
+            name=name, surname=surname, email=email, dni=dni, tlf=tlf
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -33,11 +29,11 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, null=False)
-    surname = models.CharField(max_length=50, null= False)
+    surname = models.CharField(max_length=50, null=False)
     email = models.EmailField(null=True)
     dni = models.CharField(max_length=9, unique=True, null=False)
     tlf = models.CharField(max_length=9, null=False)
-    
+
     objects = UserManager()
 
     USERNAME_FIELD = "dni"
