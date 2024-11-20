@@ -5,31 +5,6 @@ from dotenv import load_dotenv
 
 
 logger = logging.getLogger(__name__)
-
-# class DniBackend(BaseBackend):
-#     def authenticate(self, request, dni=None, pin=None, **kwargs):
-#         try:
-#             user = User.objects.get(dni=dni)
-#             if user.check_pin(pin):
-#                 return user
-#         except User.DoesNotExist:
-#             logger.error(f"Authentication failed for dni: {dni}, pin :{pin}")
-#             return None
-        
-#     def authenticate(self, request, dni=None, **kwargs):
-#         try:
-#             user = User.objects.get(dni=dni)
-#             return user
-#         except User.DoesNotExist:
-#             return None
-
-
-#     def get_user(self, user_id):
-#         try:
-#             return User.objects.get(pk=user_id)
-#         except User.DoesNotExist:
-#             return None
-
 class DNIBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
