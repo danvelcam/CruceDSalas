@@ -4,17 +4,16 @@ from app.authentication.models import User
 
 
 class UserLoginForm(forms.Form):
-    name = forms.CharField(label="Nombre")
-    surname = forms.CharField(label="Apellidos")
     dni = forms.CharField(label="DNI")
+    pin = forms.CharField(label="PIN", widget=forms.PasswordInput)
 
-    def clean_dni(self):
-        dni = self.cleaned_data.get("dni")
-        if not re.match(r"^\d{8}[A-Z]$", dni):
-            raise forms.ValidationError("El DNI no ha sido ingresado correctamente")
-        if not _check_DNI(dni):
-            raise forms.ValidationError("El DNI no es válido")
-        return dni
+    # def clean_dni(self):
+    #     dni = self.cleaned_data.get("dni")
+    #     if not re.match(r"^\d{8}[A-Z]$", dni):
+    #         raise forms.ValidationError("El DNI no ha sido ingresado correctamente")
+    #     if not _check_DNI(dni):
+    #         raise forms.ValidationError("El DNI no es válido")
+    #     return dni
 
 
 class UserRegisterForm(forms.Form):
@@ -23,6 +22,8 @@ class UserRegisterForm(forms.Form):
     dni = forms.CharField(label="DNI")
     email = forms.EmailField(label="Email")
     tlf= forms.CharField(label="Teléfono")
+    choose_pin = forms.BooleanField(label="Deseo elegir mi propio PIN", required=False)
+    pin = forms.CharField(label="PIN", widget=forms.PasswordInput, required=False)
     accept_terms = forms.BooleanField(label="Acepto el almacenamiento de mis datos", required=True)
 
 
@@ -33,6 +34,15 @@ class UserRegisterForm(forms.Form):
         if not _check_DNI(dni):
             raise forms.ValidationError("El DNI no es válido")
         return dni
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        choose_pin = cleaned_data.get("choose_pin")
+        pin = cleaned_data.get("pin")
+
+        if choose_pin and not pin:
+            raise forms.ValidationError("Debe ingresar un PIN si ha seleccionado la opción de elegir su propio PIN.")
+        return cleaned_data
 
     def clean_email(self) -> str:
         email = self.cleaned_data.get("email")
@@ -47,7 +57,8 @@ class UserRegisterForm(forms.Form):
             surname=data.get("surname"),
             email=data.get("email"),
             dni=data.get("dni"),
-            tlf=data.get("tlf")
+            tlf=data.get("tlf"),
+            pin=data.get("pin") if data.get("choose_pin") else None
         )
 
 def _check_DNI(dni:str ) -> bool:

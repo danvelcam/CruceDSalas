@@ -31,8 +31,6 @@
                 margin-bottom: 20px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
-                box-sizing: border-box;
-                font-size: 14px;
             }
             .login-box input:focus {
                 border-color: #16748c;
@@ -132,6 +130,26 @@
                     {{ form.tlf.label_tag }}
                     {{ form.tlf }}
                     {% for error in form.tlf.errors %}
+                        <div class="error-message">
+                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="{% if form.choose_pin.errors %}field-error{% endif %}">
+                    {{ form.choose_pin.label_tag }}
+                    {{ form.choose_pin }}
+                    {% for error in form.choose_pin.errors %}
+                        <div class="error-message">
+                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="{% if form.pin.errors %}field-error{% endif %}">
+                    {{ form.pin.label_tag }}
+                    {{ form.pin }}
+                    {% for error in form.pin.errors %}
                         <div class="error-message">
                             <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
                             <span>{{ error }}</span>

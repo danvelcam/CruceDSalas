@@ -5,105 +5,109 @@
 
 {% block content %}
     <h1>Iniciar Sesión</h1>
-    <div class="{% if error %}error-box{% endif %}">
-        {{error}}
+    <div class="{% if msg %}error-box{% endif %}">
+        {{msg}}
     </div>
-    <style>
-        .login-box, .error-box {
-            width: 400px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .login-box {
-            border: 1px solid #16748c;
-            background-color: white;
-        }
-        .login-box label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .login-box input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .login-box button {
-            width: 100%;
-            padding: 10px;
-            background-color: #16748c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .login-box button:hover {
-            background-color: #145a6e;
-        }
-        .error-message {
-            color: red;
-            display: flex;
-            align-items: center;
-            margin-top: -15px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        .error-message img {
-            margin-right: 10px;
-            width: 1.2em;
-            height: 1.2em;
-            stroke: red;
-        }
-        .field-error {
-            border-color: red;
-        }
-        .error-box {
-            border: 1px solid red;
-            background-color: #f8d7da;
-            color: #721c24;
-            margin-bottom: 20px;
-        }
-    </style>
-    <div class="login-box">
-        <form method="post">
-            {% csrf_token %}
-            <div class="{% if form.name.errors %}field-error{% endif %}">
-                {{ form.name.label_tag }}
-                {{ form.name }}
-                {% for error in form.name.errors %}
-                    <div class="error-message">
-                        <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                        <span>{{ error }}</span>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="{% if form.surname.errors %}field-error{% endif %}">
-                {{ form.surname.label_tag }}
-                {{ form.surname }}
-                {% for error in form.surname.errors %}
-                    <div class="error-message">
-                        <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                        <span>{{ error }}</span>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="{% if form.dni.errors %}field-error{% endif %}">
-                {{ form.dni.label_tag }}
-                {{ form.dni }}
-                {% for error in form.dni.errors %}
-                    <div class="error-message">
-                        <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                        <span>{{ error }}</span>
-                    </div>
-                {% endfor %}
-            </div>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
+    <div class="form-container">
+        <style>
+            .login-box {
+                width: 400px;
+                margin: 0 auto;
+                padding: 30px;
+                border: 1px solid #16748c;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .login-box label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+                color: #333;
+            }
+            .login-box input {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .login-box input:focus {
+                border-color: #16748c;
+                outline: none;
+                box-shadow: 0 0 5px rgba(22, 116, 140, 0.5);
+            }
+            .login-box button {
+                width: 100%;
+                padding: 10px;
+                background-color: #16748c;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+            .login-box button:hover {
+                background-color: #145a6e;
+            }
+            .error-message {
+                color: red;
+                display: flex;
+                align-items: center;
+                margin-top: -15px;
+                margin-bottom: 20px;
+                font-size: 14px;
+            }
+            .error-message img {
+                margin-right: 10px;
+                width: 1.2em;
+                height: 1.2em;
+                stroke: red;
+            }
+            .field-error input {
+                border-color: red;
+            }
+            .error-box {
+                border: 1px solid red;
+                background-color: #f8d7da;
+                color: #721c24;
+                margin-bottom: 20px;
+                width: 400px;
+                margin: 0 auto;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .form-container {
+                padding-top: 20px; /* Añadir padding entre error-box y login-box */
+            }
+        </style>
+        <div class="login-box">
+            <form method="post">
+                {% csrf_token %}
+                <div class="{% if form.dni.errors %}field-error{% endif %}">
+                    {{ form.dni.label_tag }}
+                    {{ form.dni }}
+                    {% for error in form.dni.errors %}
+                        <div class="error-message">
+                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="{% if form.pin.errors %}field-error{% endif %}">
+                    {{ form.pin.label_tag }}
+                    {{ form.pin }}
+                    {% for error in form.pin.errors %}
+                        <div class="error-message">
+                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
     </div>
 {% endblock %}
