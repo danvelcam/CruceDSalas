@@ -1,0 +1,64 @@
+.message-box {
+    width: 400px;
+    margin: 20px auto; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 7px #312F2F;
+    color: white; 
+}
+
+.message-box.success {
+    background-color: #28965A;
+}
+
+.message-box.warning {
+    background-color: #F58A07;
+}
+
+.message-box.error {
+    background-color: #D33F49;
+}
+
+.login-box {
+    width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 2.5px solid #16748c;
+    background-color: #EBE9E9;
+    border-radius: 10px;
+    box-shadow: 0 0 7px #312F2F;
+}
+
+.login-box label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #30292F;
+    text-align: left;
+}
+
+.login-box input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-box input:focus {
+    border-color: #16748c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(22, 116, 140, 0.5);
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #16748c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease
+}

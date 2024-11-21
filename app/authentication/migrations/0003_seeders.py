@@ -8,7 +8,7 @@ def create_users(apps, schema_editor):
         email='admin_email@example.com',
         dni='12345678Z',
         tlf='987654321',
-        pin='1234'
+        pin='1234',
     )
 
     User.objects.create_user(

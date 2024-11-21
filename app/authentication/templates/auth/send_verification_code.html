@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Restablecer contraseña</h2>
+{% if error %}
+    <div class="error-message">{{ error }}</div>
+{% endif %}
+    
+<form method="post">
+    {% csrf_token %}
+    <label for="phone_number">Número de teléfono:</label>
+    <input type="text" name="phone_number" required>
+    <button type="submit">Enviar código de verificación</button>
+</form>
+{% endblock %}

@@ -2,51 +2,25 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import random
 import datetime
-from dotenv import load_dotenv
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import pad, unpad
-from Crypto.Hash import HMAC, SHA256
-import base64
-import os
-
-load_dotenv()
-
-key_base64 = os.getenv("AES_KEY")
-key = base64.b64decode(key_base64)
-
-
-def derive_iv(data, key):
-    h = HMAC.new(key, digestmod=SHA256)
-    h.update(data.encode())
-    return h.digest()[:16] 
-
-def encrypt_cbc(plain_text, key):
-    iv = derive_iv(plain_text, key)
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    padded_text = pad(plain_text.encode(), AES.block_size)
-    encrypted_text = cipher.encrypt(padded_text)
-    return base64.b64encode(encrypted_text).decode()
-
-def decrypt_cbc(encrypted_text, key, plain_text):
-    iv = derive_iv(plain_text, key)
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    decoded_encrypted_text = base64.b64decode(encrypted_text)
-    decrypted_text = unpad(cipher.decrypt(decoded_encrypted_text), AES.block_size)
-    return decrypted_text.decode()
-
+from app.utils.crypto import encrypt_cbc, decrypt_cbc, key
 
 class UserManager(BaseUserManager):
-    def create_user(self, name, surname, email, dni, tlf, pin):
+    def create_user(self, name, surname, email, dni, tlf, pin, is_admin=False):
         if not dni:
             raise ValueError("Users must have a DNI")
         user = self.model(
             name=name,
             surname=surname,
-            email=self.normalize_email(email),
+            email=encrypt_cbc(self.normalize_email(email), key),
             dni=encrypt_cbc(dni,key),
             tlf=encrypt_cbc(tlf,key)
         )
         user.set_password(pin)
+        if is_admin:
+            user.is_admin = True
+            user.is_superuser = True
+            user.is_staff = True
+
         user.save(using=self._db)
         return user
 
@@ -57,23 +31,11 @@ class UserManager(BaseUserManager):
             email=email,
             dni=dni,
             tlf=tlf,
-            pin=pin
-        )
-        user.is_admin = True
-        user.is_superuser = True
+            pin=pin,
+            is_admin=True
+        )        
         return user
     
-    def generate_random_pin(self):
-        return str(random.randint(1000, 9999))
-    
-    def sms_pin_generator(self, pin, tlf):
-        file_path = "sms.log"
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        message = f"Your PIN is {pin}"
-        log_entry = f"[{timestamp}] To: {tlf} | Message: \"{message}\" \n"
-        with open(file_path, "a") as file:
-            file.write(log_entry)
-
 
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
@@ -85,6 +47,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     
     objects = UserManager()
 
@@ -108,8 +71,3 @@ class User(AbstractBaseUser):
 
     def get_decrypted_tlf(self):
         return self.decrypt_value(self.tlf, self.tlf)
-
-
-    @property
-    def is_staff(self):
-        return self.is_admin

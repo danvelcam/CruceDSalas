@@ -25,4 +25,9 @@ class Migration(migrations.Migration):
             name='is_superuser',
             field=models.BooleanField(default=False),
         ),
+        migrations.AddField(
+            model_name='user',
+            name='is_staff',
+            field=models.BooleanField(default=False)
+        )
     ]
