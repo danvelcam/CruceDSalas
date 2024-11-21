@@ -1,39 +1,31 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-<div class="container text-center mt-5">
-    <h2 class="mb-4">Califica la facilidad para hacer la reserva</h2>
-    
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method="POST" class="d-flex justify-content-center gap-4">
-                {% csrf_token %}
-                <button type="submit" name="valoracion" value="positiva" 
-                        class="btn btn-lg btn-outline-success p-4">
-                    👍
-                </button>
-                <button type="submit" name="valoracion" value="negativa" 
-                        class="btn btn-lg btn-outline-danger p-4">
-                    👎
-                </button>
-            </form>
+<div class="feedback-container">
+    <h2>¿Qué tan satisfecho te encuentras con nuestro servicio?</h2>
+    <div class="ratings">
+        <div class="rating">
+            <img src="{% static 'images/very_dissatisfied.png' %}" alt="Muy insatisfecho">
+            <p>Muy insatisfecho</p>
+        </div>
+        <div class="rating">
+            <img src="{% static 'images/dissatisfied.png' %}" alt="Insatisfecho">
+            <p>Insatisfecho</p>
+        </div>
+        <div class="rating">
+            <img src="{% static 'images/neutral.png' %}" alt="Neutral">
+            <p>Neutral</p>
+        </div>
+        <div class="rating">
+            <img src="{% static 'images/satisfied.png' %}" alt="Satisfecho">
+            <p>Satisfecho</p>
+        </div>
+        <div class="rating">
+            <img src="{% static 'images/very_satisfied.png' %}" alt="Muy Satisfecho">
+            <p>Muy Satisfecho</p>
         </div>
     </div>
 </div>
-
-<style>
-    .btn {
-        font-size: 2rem;
-        transition: transform 0.2s;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .btn:hover {
-        transform: scale(1.1);
-    }
-</style>
 {% endblock %}
