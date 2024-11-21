@@ -4,26 +4,25 @@
 {% block title %}Registro{% endblock %}
 
 {% block content %}
-    <h1>Registro de Usuario</h1>
-    <div class="{% if msg %}error-box{% endif %}">
-        {{msg}}
-    </div>
+    <h1>¡Regístrate para poder reservas salas!</h1>
+    <div id="error-container" class="error-box" style="display: none;"></div>
     <div class="form-container">
         <style>
             .login-box {
                 width: 400px;
                 margin: 0 auto;
                 padding: 30px;
-                border: 1px solid #16748c;
-                background-color: white;
+                border: 2.5px solid #16748c;
+                background-color: #EBE9E9;
                 border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 0 7px #312F2F;
             }
             .login-box label {
                 display: block;
                 margin-bottom: 5px;
                 font-weight: bold;
-                color: #333;
+                color: #30292F;
+                text-align: left;
             }
             .login-box input {
                 width: calc(100% - 20px);
@@ -53,121 +52,62 @@
             }
             .error-message {
                 color: red;
-                display: flex;
-                align-items: center;
                 margin-top: -15px;
                 margin-bottom: 20px;
                 font-size: 14px;
-            }
-            .error-message img {
-                margin-right: 10px;
-                width: 1.2em;
-                height: 1.2em;
-                stroke: red;
             }
             .field-error input {
                 border-color: red;
             }
             .error-box {
-                border: 1px solid red;
-                background-color: #f8d7da;
-                color: #721c24;
+                border: 1px solid #721c24;
+                background-color: #D33F49;
+                color: #30292F;
                 margin-bottom: 20px;
                 width: 400px;
                 margin: 0 auto;
                 padding: 30px;
                 border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 0 5px #312F2F;
             }
             .form-container {
                 padding-top: 20px; /* Añadir padding entre error-box y login-box */
             }
         </style>
         <div class="login-box">
-            <form method="post">
+            <form method="post" onsubmit="return validateForm()">
                 {% csrf_token %}
                 <div class="{% if form.name.errors %}field-error{% endif %}">
                     {{ form.name.label_tag }}
                     {{ form.name }}
-                    {% for error in form.name.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
                 </div>
                 <div class="{% if form.surname.errors %}field-error{% endif %}">
                     {{ form.surname.label_tag }}
                     {{ form.surname }}
-                    {% for error in form.surname.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
                 </div>
                 <div class="{% if form.dni.errors %}field-error{% endif %}">
                     {{ form.dni.label_tag }}
                     {{ form.dni }}
-                    {% for error in form.dni.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="{% if form.email.errors %}field-error{% endif %}">
-                    {{ form.email.label_tag }}
-                    {{ form.email }}
-                    {% for error in form.email.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
                 </div>
                 <div class="{% if form.tlf.errors %}field-error{% endif %}">
                     {{ form.tlf.label_tag }}
                     {{ form.tlf }}
-                    {% for error in form.tlf.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
                 </div>
-                <div class="{% if form.choose_pin.errors %}field-error{% endif %}">
-                    {{ form.choose_pin.label_tag }}
-                    {{ form.choose_pin }}
-                    {% for error in form.choose_pin.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
+                <div class="{% if form.email.errors %}field-error{% endif %}">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
                 </div>
                 <div class="{% if form.pin.errors %}field-error{% endif %}">
                     {{ form.pin.label_tag }}
                     {{ form.pin }}
-                    {% for error in form.pin.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
                 </div>
-                <div class="{% if form.accept_terms.errors %}field-error{% endif %}">
-                    {{ form.accept_terms.label_tag }}
-                    {{ form.accept_terms }}
-                    {% for error in form.accept_terms.errors %}
-                        <div class="error-message">
-                            <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
-                            <span>{{ error }}</span>
-                        </div>
-                    {% endfor %}
+                <div class="{% if form.repeat_pin.errors %}field-error{% endif %}">
+                    <label for="repeat-pin">Confirme el PIN</label>
+                    <input type="password" name="repeat-pin" id="repeat-pin" required>
                 </div>
                 <button type="submit">Registrarse</button>
             </form>
         </div>
     </div>
+    <script src="{% static 'scripts/registerValidation.js' %}"></script>
 {% endblock %}
