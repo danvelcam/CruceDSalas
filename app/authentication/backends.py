@@ -1,16 +1,23 @@
 from django.contrib.auth.backends import BaseBackend
-from .models import User
+from .models import User, encrypt_cbc, key
+import logging
+from dotenv import load_dotenv
 
 
-class NameDniBackend(BaseBackend):
-    def authenticate(self, request, name=None, surname=None, dni=None, **kwargs):
+logger = logging.getLogger(__name__)
+class AuthBackend(BaseBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            user = User.objects.get(name=name, dni=dni, surname=surname)
-            if user.check_password(dni):
+            encrypted_username = encrypt_cbc(username, key)
+            user = User.objects.get(dni=encrypted_username)
+            logger.error(f"User: {user.name}, {user.password}")
+            logger.error(f"Password: {user.check_password(password)}")
+            if user.check_password(password):
+                logger.error(f"Authentication success for dni: {username}")
                 return user
         except User.DoesNotExist:
             return None
-
+    
     def authenticate(self, request, dni=None, **kwargs):
         try:
             user = User.objects.get(dni=dni)
@@ -18,7 +25,7 @@ class NameDniBackend(BaseBackend):
                 return user
         except User.DoesNotExist:
             return None
-
+        
     def get_user(self, user_id):
         try:
             return User.objects.get(pk=user_id)

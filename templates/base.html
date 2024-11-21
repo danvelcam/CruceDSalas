@@ -5,8 +5,8 @@
     <title>{% block title %}CruceDSalas{% endblock %}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Helvetica', Arial, sans-serif;
+            background-color: #EBE9E9;
             margin: 0;
             padding: 0;
         }
@@ -80,10 +80,8 @@
     {% load static %}
     <div class="header">
         <div class="logo-container">
-            <img src="{% static 'images/logo2.png' %}" alt="Logo de la Aplicación">
-            <img src="{% static 'images/escudo.png' %}" alt="Escudo del Ayuntamiento">
-            <a href="{% url 'home' %}">CruceDSalas</a>
-        </div>
+            <img src="{% static 'images/Logo_crucedesalasblanco.png' %}" alt="Logo de la Aplicación">
+            <a href="{% url 'home' %}" style="color: #EBE9E9;">CruceDSalas</a>        </div>
         <div class="auth-status">
             {% block auth_status %}{% endblock %}
         </div>
