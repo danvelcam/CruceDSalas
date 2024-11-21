@@ -7,14 +7,14 @@ class UserLoginForm(forms.Form):
     dni = forms.CharField(label="DNI")
     pin = forms.CharField(label="PIN", widget=forms.PasswordInput)
 
+
 class UserRegisterForm(forms.Form):
     name = forms.CharField(label="Nombre")
     surname = forms.CharField(label="Apellidos")
     dni = forms.CharField(label="DNI")
     email = forms.EmailField(label="Email")
-    tlf= forms.CharField(label="Teléfono")
+    tlf = forms.CharField(label="Teléfono")
     pin = forms.CharField(label="PIN", widget=forms.PasswordInput, required=False)
-
 
     def clean_dni(self):
         dni = self.cleaned_data.get("dni")
@@ -23,7 +23,7 @@ class UserRegisterForm(forms.Form):
         if not _check_DNI(dni):
             raise forms.ValidationError("El DNI no es válido")
         return dni
-    
+
     def clean_email(self) -> str:
         email = self.cleaned_data.get("email")
         if not re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email):
@@ -38,16 +38,36 @@ class UserRegisterForm(forms.Form):
             email=data.get("email"),
             dni=data.get("dni"),
             tlf=data.get("tlf"),
-            pin=data.get("pin")
+            pin=data.get("pin"),
         )
-        
-def _check_DNI(dni:str ) -> bool:
-        control_letter = {
-    0: 'T', 1: 'R', 2: 'W', 3: 'A', 4: 'G', 5: 'M', 6: 'Y', 7: 'F', 8: 'P', 9: 'D',
-    10: 'X', 11: 'B', 12: 'N', 13: 'J', 14: 'Z', 15: 'S', 16: 'Q', 17: 'V', 18: 'H', 19: 'L',
-    20: 'C', 21: 'K', 22: 'E'
-}
-        dni_letter = dni[-1]
-        dni_numbers = int(dni[:-1])
-        return control_letter[dni_numbers % 23] == dni_letter
 
+
+def _check_DNI(dni: str) -> bool:
+    control_letter = {
+        0: "T",
+        1: "R",
+        2: "W",
+        3: "A",
+        4: "G",
+        5: "M",
+        6: "Y",
+        7: "F",
+        8: "P",
+        9: "D",
+        10: "X",
+        11: "B",
+        12: "N",
+        13: "J",
+        14: "Z",
+        15: "S",
+        16: "Q",
+        17: "V",
+        18: "H",
+        19: "L",
+        20: "C",
+        21: "K",
+        22: "E",
+    }
+    dni_letter = dni[-1]
+    dni_numbers = int(dni[:-1])
+    return control_letter[dni_numbers % 23] == dni_letter

@@ -14,7 +14,8 @@ key = base64.b64decode(key_base64)
 def derive_iv(data, key):
     h = HMAC.new(key, digestmod=SHA256)
     h.update(data.encode())
-    return h.digest()[:16] 
+    return h.digest()[:16]
+
 
 def encrypt_cbc(plain_text, key):
     iv = derive_iv(plain_text, key)
@@ -22,6 +23,7 @@ def encrypt_cbc(plain_text, key):
     padded_text = pad(plain_text.encode(), AES.block_size)
     encrypted_text = cipher.encrypt(padded_text)
     return base64.b64encode(encrypted_text).decode()
+
 
 def decrypt_cbc(encrypted_text, key, plain_text):
     iv = derive_iv(plain_text, key)

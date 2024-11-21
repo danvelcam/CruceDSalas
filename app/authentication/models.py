@@ -4,6 +4,7 @@ import random
 import datetime
 from app.utils.crypto import encrypt_cbc, decrypt_cbc, key
 
+
 class UserManager(BaseUserManager):
     def create_user(self, name, surname, email, dni, tlf, pin, is_admin=False):
         if not dni:
@@ -12,8 +13,8 @@ class UserManager(BaseUserManager):
             name=name,
             surname=surname,
             email=encrypt_cbc(self.normalize_email(email), key),
-            dni=encrypt_cbc(dni,key),
-            tlf=encrypt_cbc(tlf,key)
+            dni=encrypt_cbc(dni, key),
+            tlf=encrypt_cbc(tlf, key),
         )
         user.set_password(pin)
         if is_admin:
@@ -32,10 +33,10 @@ class UserManager(BaseUserManager):
             dni=dni,
             tlf=tlf,
             pin=pin,
-            is_admin=True
-        )        
+            is_admin=True,
+        )
         return user
-    
+
 
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
@@ -48,7 +49,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    
+
     objects = UserManager()
 
     USERNAME_FIELD = "dni"
@@ -62,7 +63,7 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-    
+
     def decrypt_value(self, value, plain_text):
         return decrypt_cbc(value, key, plain_text)
 
