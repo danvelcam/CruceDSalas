@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Reservar {{ sala.nombre }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Realizar Reserva</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var fechaInput = document.getElementById('id_fecha');
+        var horaInicioInput = document.getElementById('id_hora_inicio');
+        var horaFinInput = document.getElementById('id_hora_fin');
+
+        // Configurar límites de fecha
+        fechaInput.min = '{{ fecha_actual|date:"Y-m-d" }}';
+        fechaInput.max = '{{ fecha_limite|date:"Y-m-d" }}';
+
+        // Configurar límites de hora
+        horaInicioInput.min = '09:00';
+        horaInicioInput.max = '21:00';
+        horaFinInput.min = '09:00';
+        horaFinInput.max = '21:00';
+
+        // Validación adicional
+        horaInicioInput.addEventListener('change', function() {
+            if (horaFinInput.value && this.value >= horaFinInput.value) {
+                alert('La hora de inicio debe ser anterior a la hora de fin.');
+                this.value = '';
+            }
+        });
+
+        horaFinInput.addEventListener('change', function() {
+            if (horaInicioInput.value && this.value <= horaInicioInput.value) {
+                alert('La hora de fin debe ser posterior a la hora de inicio.');
+                this.value = '';
+            }
+        });
+    });
+</script>
+{% endblock %}
