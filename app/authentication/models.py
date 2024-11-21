@@ -18,7 +18,7 @@ key = base64.b64decode(key_base64)
 def derive_iv(data, key):
     h = HMAC.new(key, digestmod=SHA256)
     h.update(data.encode())
-    return h.digest()[:16]  # Usar los primeros 16 bytes como IV
+    return h.digest()[:16] 
 
 def encrypt_cbc(plain_text, key):
     iv = derive_iv(plain_text, key)
@@ -46,25 +46,21 @@ class UserManager(BaseUserManager):
             dni=encrypt_cbc(dni,key),
             tlf=encrypt_cbc(tlf,key)
         )
-        if pin is not None:
-            user.set_password(pin)
-        else: 
-            pin = self.generate_random_pin()
-            self.sms_pin_generator(pin, tlf)
-            user.set_password(str(pin))
+        user.set_password(pin)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, name, surname, email, dni, tlf):
+    def create_superuser(self, name, surname, email, dni, tlf, pin):
         user = self.create_user(
             name=name,
             surname=surname,
             email=email,
             dni=dni,
-            tlf=tlf
+            tlf=tlf,
+            pin=pin
         )
         user.is_admin = True
-        user.save(using=self._db)
+        user.is_superuser = True
         return user
     
     def generate_random_pin(self):
@@ -86,6 +82,9 @@ class User(AbstractBaseUser):
     email = models.EmailField(null=True)
     dni = models.CharField(max_length=9, unique=True, null=False)
     tlf = models.CharField(max_length=9, null=False)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     
     objects = UserManager()
 
