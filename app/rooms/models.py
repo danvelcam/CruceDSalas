@@ -8,3 +8,10 @@ class Sala(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Valoracion(models.Model):
+    satisfecho = models.BooleanField()
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Valoración {'👍' if self.satisfecho else '👎'} - {self.fecha}"

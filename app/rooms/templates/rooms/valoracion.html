@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Califica la facilidad para hacer la reserva</h2>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" class="d-flex justify-content-center gap-4">
+                {% csrf_token %}
+                <button type="submit" name="valoracion" value="positiva" 
+                        class="btn btn-lg btn-outline-success p-4">
+                    👍
+                </button>
+                <button type="submit" name="valoracion" value="negativa" 
+                        class="btn btn-lg btn-outline-danger p-4">
+                    👎
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn {
+        font-size: 2rem;
+        transition: transform 0.2s;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn:hover {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}

@@ -5,25 +5,30 @@
 
 {% block content %}
     <h1>Iniciar Sesión</h1>
+    <div class="{% if error %}error-box{% endif %}">
+        {{error}}
+    </div>
     <style>
-        .login-box {
-            width: 400px; /* Hacer más grande el contenido del div */
+        .login-box, .error-box {
+            width: 400px;
             margin: 0 auto;
-            padding: 30px; /* Aumentar el padding */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-box {
             border: 1px solid #16748c;
             background-color: white;
-            border-radius: 10px; /* Bordes más redondeados */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añadir sombra */
         }
         .login-box label {
             display: block;
-            margin-bottom: 5px; /* Separar el label del input */
+            margin-bottom: 5px;
             font-weight: bold;
         }
         .login-box input {
-            width: calc(100% - 20px); /* Ajustar el ancho del input */
-            padding: 10px; /* Aumentar el padding */
-            margin-bottom: 20px; /* Espaciar más los campos */
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
@@ -47,45 +52,51 @@
             align-items: center;
             margin-top: -15px;
             margin-bottom: 20px;
-            font-size: 14px; /* Ajustar el tamaño de la fuente */
+            font-size: 14px;
         }
         .error-message img {
-            margin-right: 10px; /* Desplazar el texto del error hacia la derecha */
-            width: 1.2em; /* Hacer el SVG un poco más grande */
-            height: 1.2em; /* Hacer el SVG un poco más grande */
-            stroke: red; /* Asegurarse de que el SVG tenga el mismo color que el texto */
+            margin-right: 10px;
+            width: 1.2em;
+            height: 1.2em;
+            stroke: red;
         }
         .field-error {
             border-color: red;
+        }
+        .error-box {
+            border: 1px solid red;
+            background-color: #f8d7da;
+            color: #721c24;
+            margin-bottom: 20px;
         }
     </style>
     <div class="login-box">
         <form method="post">
             {% csrf_token %}
-            <div class="{% if form.Nombre.errors %}field-error{% endif %}">
-                {{ form.Nombre.label_tag }}
-                {{ form.Nombre }}
-                {% for error in form.Nombre.errors %}
+            <div class="{% if form.name.errors %}field-error{% endif %}">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {% for error in form.name.errors %}
                     <div class="error-message">
                         <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
                         <span>{{ error }}</span>
                     </div>
                 {% endfor %}
             </div>
-            <div class="{% if form.Apellidos.errors %}field-error{% endif %}">
-                {{ form.Apellidos.label_tag }}
-                {{ form.Apellidos }}
-                {% for error in form.Apellidos.errors %}
+            <div class="{% if form.surname.errors %}field-error{% endif %}">
+                {{ form.surname.label_tag }}
+                {{ form.surname }}
+                {% for error in form.surname.errors %}
                     <div class="error-message">
                         <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
                         <span>{{ error }}</span>
                     </div>
                 {% endfor %}
             </div>
-            <div class="{% if form.DNI.errors %}field-error{% endif %}">
-                {{ form.DNI.label_tag }}
-                {{ form.DNI }}
-                {% for error in form.DNI.errors %}
+            <div class="{% if form.dni.errors %}field-error{% endif %}">
+                {{ form.dni.label_tag }}
+                {{ form.dni }}
+                {% for error in form.dni.errors %}
                     <div class="error-message">
                         <img src="{% static 'icons/alert-circle.svg' %}" alt="Error Icon" class="error-icon">
                         <span>{{ error }}</span>

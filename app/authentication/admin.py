@@ -1,6 +1,6 @@
 # authentication/admin.py
 from django.contrib import admin
-from .models import User
+from app.authentication.models import User
 
 
 @admin.register(User)

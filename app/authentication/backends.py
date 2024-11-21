@@ -1,4 +1,3 @@
-# autenticacion/backends.py
 from django.contrib.auth.backends import BaseBackend
 from .models import User
 
@@ -7,6 +6,14 @@ class NameDniBackend(BaseBackend):
     def authenticate(self, request, name=None, surname=None, dni=None, **kwargs):
         try:
             user = User.objects.get(name=name, dni=dni, surname=surname)
+            if user.check_password(dni):
+                return user
+        except User.DoesNotExist:
+            return None
+
+    def authenticate(self, request, dni=None, **kwargs):
+        try:
+            user = User.objects.get(dni=dni)
             if user.check_password(dni):
                 return user
         except User.DoesNotExist:
