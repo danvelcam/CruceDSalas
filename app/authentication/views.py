@@ -32,6 +32,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, "auth/register.html", {"form": form})
 
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -46,7 +47,9 @@ def login_view(request):
                 return redirect("home")            
             else:
                 error = "Usuario o contraseña incorrectos"
-                return render(request, "auth/login.html", {"form": form ,'error':error})
+                return render(
+                    request, "auth/login.html", {"form": form, "error": error}
+                )
     else:
         form = UserLoginForm()
     return render(request, "auth/login.html", {"form": form})

@@ -16,7 +16,14 @@ class AuthBackend(BaseBackend):
                 logger.error(f"Authentication success for dni: {username}")
                 return user
         except User.DoesNotExist:
-            logger.error(f"Authentication failed for dni: {username}, pin: {password}")
+            return None
+    
+    def authenticate(self, request, dni=None, **kwargs):
+        try:
+            user = User.objects.get(dni=dni)
+            if user.check_password(dni):
+                return user
+        except User.DoesNotExist:
             return None
         
     def get_user(self, user_id):
