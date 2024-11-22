@@ -3,21 +3,79 @@
 
 {% block content %}
 <div class="feedback-container">
-    <h2>¿Qué tan satisfecho te encuentras con nuestro servicio?</h2>
-    <form method="POST" action="{% url 'valorar_experiencia' %}">
+    <h2 class="text-center my-4">¿Qué tan satisfecho te encuentras con nuestro servicio?</h2>
+    <form method="POST" action="{% url 'valorar_experiencia' %}" class="d-flex justify-content-center align-items-center gap-4">
         {% csrf_token %}
-        <div class="ratings">
-            <!-- Botón para Insatisfecho -->
-            <button type="submit" name="valoracion" value="negativa" style="border: none; background: none;">
-                <img src="{% static 'images/dissatisfied.png' %}" alt="Insatisfecho" style="width: 100px; height: auto; cursor: pointer;">
-                <p>Insatisfecho</p>
-            </button>
-            <!-- Botón para Satisfecho -->
-            <button type="submit" name="valoracion" value="positiva" style="border: none; background: none;">
-                <img src="{% static 'images/satisfied.png' %}" alt="Satisfecho" style="width: 100px; height: auto; cursor: pointer;">
-                <p>Satisfecho</p>
-            </button>
-        </div>
+        <button type="submit" name="valoracion" value="positiva" 
+        class="feedback-btn feedback-btn-positive">
+            👍
+        </button>
+        <button type="submit" name="valoracion" value="negativa" 
+        class="feedback-btn feedback-btn-negative">
+            👎
+        </button>
     </form>
 </div>
+
+<style>
+.feedback-container {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 600px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #343a40;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.feedback-btn {
+    font-size: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.feedback-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-btn-positive {
+    background-color: #28a745;
+    color: white;
+}
+
+.feedback-btn-positive:hover {
+    background-color: #218838;
+}
+
+.feedback-btn-negative {
+    background-color: #dc3545;
+    color: white;
+}
+
+.feedback-btn-negative:hover {
+    background-color: #c82333;
+}
+</style>
 {% endblock %}
