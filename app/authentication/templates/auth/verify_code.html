@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Verificar código</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="verification_code">Código de verificación:</label>
+    <input type="text" name="verification_code" required>
+    <button type="submit">Verificar</button>
+</form>
+{% endblock %}
