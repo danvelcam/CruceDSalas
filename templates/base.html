@@ -8,18 +8,18 @@
             background-color: #f0f2f5;
             margin: 0;
             padding: 0;
-            height: 100%; /* Asegura que el body ocupe todo el alto */
+            height: 100%;
         }
 
         /* Contenedor principal que contiene todo: header, contenido y footer */
         .container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
+            min-height: 100vh;
             width: 100%;
-            max-width: 1200px; /* Limita el ancho máximo */
-            margin: 0 auto; /* Centrado */
-            padding: 0; /* Sin espacio extra en los bordes */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
         }
 
         /* Estilo para el header */
@@ -32,7 +32,6 @@
             color: white;
         }
 
-        /* Estilo para el logo */
         .logo-container {
             display: flex;
             align-items: center;
@@ -47,51 +46,98 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .logo-container a:hover {
-            text-decoration: none;
-        }
-
-        /* Estilo para la sección de autenticación */
-        .auth-status {
-            margin-right: 20px;
-        }
-        .auth-status form {
-            display: inline;
-        }
-        .auth-status button {
-            background-color: #16748c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .auth-status button:hover {
-            background-color: #145a6e;
-        }
 
         /* Estilo para el contenido principal */
         .main-content {
             background-color: rgba(255, 255, 255, 0.9);
-            margin-top: 20px; /* Separación entre el header y el contenido */
+            margin-top: 20px;
             padding: 20px;
             text-align: center;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+            flex-grow: 1;
         }
 
         /* Estilo del footer */
-        .footer {
+        .footer-container {
             background-color: #16748c;
             color: white;
+            padding: 20px;
             text-align: center;
+            font-size: 14px;
             margin-top: 20px;
         }
 
-        .main-content h1, .footer h2 {
-            color: #16748c;
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center; /* Alinea el logo e icono verticalmente */
+        }
+
+        .footer-left p {
+            margin: 5px 0;  /* Espacio entre los párrafos */
+            font-size: 14px;  /* Tamaño de fuente para los párrafos */
+        }
+
+        .footer-left img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        /* Sección central del footer: lista de 3 elementos */
+        .footer-center {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            text-align: left;
+            margin-left: 60px;
+        }
+
+        .footer-center ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-center li {
+            display: inline;
+            font-size: 14px;
+        }
+
+        /* Estilo para la sección de iconos sociales en la derecha */
+        .footer-right {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .footer-social ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social ul li {
+            display: inline;
+        }
+
+        .footer-social ul li a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .footer-social ul li a:hover {
+            color: #145a6e;
         }
 
         /* Enlaces y botones */
@@ -114,7 +160,7 @@
 <body>
     {% load static %}
     <div class="container">
-        <!-- Header (encabezado) -->
+        <!-- Header -->
         <div class="header">
             <div class="logo-container">
                 <img src="{% static 'images/logo2.png' %}" alt="Logo de la Aplicación">
@@ -126,15 +172,40 @@
             </div>
         </div>
 
-        <!-- Contenido principal de la página -->
+        <!-- Contenido principal -->
         <div class="main-content">
             {% block content %}{% endblock %}
         </div>
 
-        <!-- Footer (pie de página) -->
-        <div class="footer">
-            <h2>Pie de página</h2>
-            <p>&copy; 2024 CruceDSalas - Todos los derechos reservados</p>
+        <!-- Footer -->
+        <div class="footer-container">
+            <div class="footer-wrapper">
+                <!-- Sección izquierda: Icono -->
+                <div class="footer-left">
+                    <img src="{% static 'images/logoBlancoHorizontal.png' %}" alt="Diputación de Huelva">
+                    <p>    2015 © Ayuntamiento de Villanueva de las Cruces.<br>Realizado en colaboración con la Diputación de Huelva.</p>
+                </div>
+
+                <!-- Sección central: Lista de 3 elementos -->
+                <div class="footer-center">
+                    <ul>
+                        <li>Contactar</li>
+                        <li>Aviso Legal</li>
+                        <li>Política de Privacidad</li>
+                    </ul>
+                </div>
+
+                <!-- Sección derecha: Iconos de redes sociales -->
+                <div class="footer-right">
+                    <div class="footer-social">
+                        <ul>
+                            <li><a href="https://www.facebook.com/guadalinfovillanuevadelascruces" target="_blank" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+                            <li><a href="http://www.twitter.es/guadacruces" target="_blank" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                            <!-- Aquí puedes agregar más iconos si es necesario -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
