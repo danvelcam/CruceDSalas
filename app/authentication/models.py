@@ -40,7 +40,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, null=False)
-    surname = models.CharField(max_length=50, null= False)
+    surname = models.CharField(max_length=50, null=False)
     email = models.EmailField(null=True)
     dni = models.CharField(max_length=9, unique=True, null=False)
     tlf = models.CharField(max_length=9, null=False)
