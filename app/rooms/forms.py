@@ -6,7 +6,7 @@ from datetime import timedelta, time
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
-        fields = ['fecha', 'hora_inicio', 'hora_fin']
+        fields = ['fecha', 'hora_inicio', 'hora_fin','asunto']
         widgets = {
             'fecha': forms.DateInput(attrs={'type': 'date'}),
             'hora_inicio': forms.TimeInput(attrs={'type': 'time', 'min': '09:00', 'max': '21:00'}),
@@ -21,6 +21,10 @@ class ReservaForm(forms.ModelForm):
 
         fecha_actual = timezone.now().date()
         fecha_limite = fecha_actual + timedelta(days=7)
+        asunto = self.cleaned_data.get('asunto')
+        if not asunto:
+            raise forms.ValidationError("Este campo es obligatorio.")
+        
 
         if fecha and (fecha < fecha_actual or fecha > fecha_limite):
             raise forms.ValidationError("La fecha debe estar entre hoy y los próximos 7 días.")

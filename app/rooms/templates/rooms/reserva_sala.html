@@ -6,6 +6,8 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <!-- Añadir campo asunto si no es automáticamente renderizado por {{ form.as_p }} -->
+
     <button type="submit">Realizar Reserva</button>
 </form>
 

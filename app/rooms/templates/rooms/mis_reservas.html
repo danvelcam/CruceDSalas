@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Mis Reservas</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sala</th>
+                <th>Fecha</th>
+                <th>Hora de Inicio</th>
+                <th>Hora de Fin</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.sala.nombre }}</td>
+                <td>{{ reserva.fecha|date:"d M Y" }}</td>
+                <td>{{ reserva.hora_inicio|date:"H:i" }}</td>
+                <td>{{ reserva.hora_fin|date:"H:i" }}</td>
+                <td>{{ reserva.estado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

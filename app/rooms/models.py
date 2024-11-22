@@ -32,6 +32,8 @@ class Reserva(models.Model):
     hora_fin = models.TimeField()
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='PENDIENTE')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+    asunto = models.CharField(max_length=255, verbose_name="Asunto de la reserva", default="No especificado")
+
 
     def __str__(self):
         return f"Reserva de {self.sala} por {self.usuario} el {self.fecha}"

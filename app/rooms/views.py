@@ -45,3 +45,7 @@ def reserva_sala(request, sala_id):
         'fecha_actual': fecha_actual,
         'fecha_limite': fecha_limite,
     })
+
+def mis_reservas(request):
+    reservas = Reserva.objects.filter(usuario=request.user).order_by('-fecha_creacion')
+    return render(request, 'rooms/mis_reservas.html', {'reservas': reservas})
