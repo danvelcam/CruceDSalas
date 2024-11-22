@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 
 logger = logging.getLogger(__name__)
+
+
 class AuthBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
@@ -18,7 +20,7 @@ class AuthBackend(BaseBackend):
         except User.DoesNotExist:
             logger.error(f"Authentication failed for dni: {username}, pin: {password}")
             return None
-        
+
     def get_user(self, user_id):
         try:
             return User.objects.get(pk=user_id)

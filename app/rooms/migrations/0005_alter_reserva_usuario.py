@@ -7,14 +7,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authentication', '0001_initial'),
-        ('rooms', '0004_reserva'),
+        ("authentication", "0001_initial"),
+        ("rooms", "0004_reserva"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='reserva',
-            name='usuario',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='authentication.user'),
+            model_name="reserva",
+            name="usuario",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="authentication.user"
+            ),
         ),
     ]

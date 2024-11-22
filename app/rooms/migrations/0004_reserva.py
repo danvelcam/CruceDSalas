@@ -8,25 +8,55 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('rooms', '0003_valoracion'),
+        ("rooms", "0003_valoracion"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Reserva',
+            name="Reserva",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fecha', models.DateField()),
-                ('hora_inicio', models.TimeField()),
-                ('hora_fin', models.TimeField()),
-                ('estado', models.CharField(choices=[('PENDIENTE', 'Pendiente de aprobación'), ('APROBADA', 'Aprobada'), ('RECHAZADA', 'Rechazada')], default='PENDIENTE', max_length=20)),
-                ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
-                ('sala', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='rooms.sala')),
-                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("fecha", models.DateField()),
+                ("hora_inicio", models.TimeField()),
+                ("hora_fin", models.TimeField()),
+                (
+                    "estado",
+                    models.CharField(
+                        choices=[
+                            ("PENDIENTE", "Pendiente de aprobación"),
+                            ("APROBADA", "Aprobada"),
+                            ("RECHAZADA", "Rechazada"),
+                        ],
+                        default="PENDIENTE",
+                        max_length=20,
+                    ),
+                ),
+                ("fecha_creacion", models.DateTimeField(auto_now_add=True)),
+                (
+                    "sala",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="rooms.sala"
+                    ),
+                ),
+                (
+                    "usuario",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['fecha', 'hora_inicio'],
+                "ordering": ["fecha", "hora_inicio"],
             },
         ),
     ]

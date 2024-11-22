@@ -6,16 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('rooms', '0002_populate_salas'),
+        ("rooms", "0002_populate_salas"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Valoracion',
+            name="Valoracion",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('satisfecho', models.BooleanField()),
-                ('fecha', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("satisfecho", models.BooleanField()),
+                ("fecha", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]
