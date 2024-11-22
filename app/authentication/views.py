@@ -32,9 +32,11 @@ def register(request):
         form = UserRegisterForm()
     return render(request, "auth/register.html", {"form": form})
 
+
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("lista_salas")
+    
     if request.method == "POST":
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -43,12 +45,15 @@ def login_view(request):
             user = authenticate(request, username=dni, password = pin)
             if user is not None:
                 login(request, user)
-                return redirect("home")            
+                return redirect("lista_salas")
             else:
                 error = "Usuario o contraseña incorrectos"
-                return render(request, "auth/login.html", {"form": form ,'error':error})
+                return render(
+                    request, "auth/login.html", {"form": form, "error": error}
+                )
     else:
         form = UserLoginForm()
+    
     return render(request, "auth/login.html", {"form": form})
 
 
