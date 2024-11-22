@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Sala
 from .models import Valoracion
-
+from django.contrib import messages
 
 def lista_salas(request):
     salas = Sala.objects.all()
@@ -16,6 +16,7 @@ def valorar_experiencia(request):
     if request.method == 'POST':
         satisfecho = request.POST.get('valoracion') == 'positiva'
         Valoracion.objects.create(satisfecho=satisfecho)
-        return redirect('lista_salas')
-    
+        messages.success(request, '¡Gracias! Tu valoración se ha enviado con éxito.')  # Mensaje de éxito
+        return redirect('lista_salas')  # Redirige después de guardar la valoración
+
     return render(request, 'rooms/valoracion.html')

@@ -88,8 +88,68 @@
             {% block auth_status %}{% endblock %}
         </div>
     </div>
+ <!-- Bloque de mensajes -->
+ {% if messages %}
+ <div class="messages">
+     {% for message in messages %}
+     <div class="message {{ message.tags }}">
+         {{ message }}
+     </div>
+     {% endfor %}
+ </div>
+ {% endif %}
+ <!-- Fin del bloque de mensajes -->
     <div class="main-content">
         {% block content %}{% endblock %}
     </div>
+    <script>
+        // Esperar 5 segundos (5000 ms) y eliminar los mensajes
+        setTimeout(() => {
+            const messages = document.querySelector('.messages');
+            if (messages) {
+                messages.style.transition = "opacity 0.5s ease";
+                messages.style.opacity = "0";
+                setTimeout(() => messages.remove(), 500); // Remover el nodo después de la animación
+            }
+        }, 5000);
+    </script>
+    <style>
+        .messages {
+            position: fixed;
+            top: 70px; /* Justo debajo del header */
+            right: 20px;
+            z-index: 1000;
+            width: 300px;
+            text-align: left;
+        }
+        
+        .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+            opacity: 1; /* Controla la visibilidad inicial */
+            transition: opacity 0.5s ease; /* Animación de desvanecimiento */
+        }
+        
+        .message.success {
+            background-color: #4CAF50; /* Verde para mensajes de éxito */
+        }
+        
+        .message.error {
+            background-color: #f44336; /* Rojo para mensajes de error */
+        }
+        
+        .message.info {
+            background-color: #2196F3; /* Azul para mensajes informativos */
+        }
+        
+        .message.warning {
+            background-color: #ff9800; /* Naranja para advertencias */
+        }
+        
+    </style>
+    
 </body>
 </html>

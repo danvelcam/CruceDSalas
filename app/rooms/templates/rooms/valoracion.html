@@ -1,31 +1,23 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block content %}
 <div class="feedback-container">
     <h2>¿Qué tan satisfecho te encuentras con nuestro servicio?</h2>
-    <div class="ratings">
-        <div class="rating">
-            <img src="{% static 'images/very_dissatisfied.png' %}" alt="Muy insatisfecho">
-            <p>Muy insatisfecho</p>
+    <form method="POST" action="{% url 'valorar_experiencia' %}">
+        {% csrf_token %}
+        <div class="ratings">
+            <!-- Botón para Insatisfecho -->
+            <button type="submit" name="valoracion" value="negativa" style="border: none; background: none;">
+                <img src="{% static 'images/dissatisfied.png' %}" alt="Insatisfecho" style="width: 100px; height: auto; cursor: pointer;">
+                <p>Insatisfecho</p>
+            </button>
+            <!-- Botón para Satisfecho -->
+            <button type="submit" name="valoracion" value="positiva" style="border: none; background: none;">
+                <img src="{% static 'images/satisfied.png' %}" alt="Satisfecho" style="width: 100px; height: auto; cursor: pointer;">
+                <p>Satisfecho</p>
+            </button>
         </div>
-        <div class="rating">
-            <img src="{% static 'images/dissatisfied.png' %}" alt="Insatisfecho">
-            <p>Insatisfecho</p>
-        </div>
-        <div class="rating">
-            <img src="{% static 'images/neutral.png' %}" alt="Neutral">
-            <p>Neutral</p>
-        </div>
-        <div class="rating">
-            <img src="{% static 'images/satisfied.png' %}" alt="Satisfecho">
-            <p>Satisfecho</p>
-        </div>
-        <div class="rating">
-            <img src="{% static 'images/very_satisfied.png' %}" alt="Muy Satisfecho">
-            <p>Muy Satisfecho</p>
-        </div>
-    </div>
+    </form>
 </div>
 {% endblock %}
