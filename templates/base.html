@@ -1,6 +1,5 @@
-<!-- templates/base.html -->
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <title>{% block title %}CruceDSalas{% endblock %}</title>
     <style>
@@ -9,7 +8,21 @@
             background-color: #f0f2f5;
             margin: 0;
             padding: 0;
+            height: 100%; /* Asegura que el body ocupe todo el alto */
         }
+
+        /* Contenedor principal que contiene todo: header, contenido y footer */
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
+            width: 100%;
+            max-width: 1200px; /* Limita el ancho máximo */
+            margin: 0 auto; /* Centrado */
+            padding: 0; /* Sin espacio extra en los bordes */
+        }
+
+        /* Estilo para el header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -18,6 +31,8 @@
             background-color: #16748c;
             color: white;
         }
+
+        /* Estilo para el logo */
         .logo-container {
             display: flex;
             align-items: center;
@@ -33,8 +48,10 @@
             font-weight: bold;
         }
         .logo-container a:hover {
-            text-decoration: none; /* Evitar el subrayado al pasar el ratón por encima */
+            text-decoration: none;
         }
+
+        /* Estilo para la sección de autenticación */
         .auth-status {
             margin-right: 20px;
         }
@@ -53,16 +70,34 @@
         .auth-status button:hover {
             background-color: #145a6e;
         }
+
+        /* Estilo para el contenido principal */
         .main-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            margin-top: 20px; /* Separación entre el header y el contenido */
             padding: 20px;
             text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
         }
-        .main-content h1 {
+
+        /* Estilo del footer */
+        .footer {
+            background-color: #16748c;
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .main-content h1, .footer h2 {
             color: #16748c;
         }
+
+        /* Enlaces y botones */
         .main-content a, .auth-status button {
             display: inline-block;
-            margin: 10px;
+            margin: 10px 5px;
             padding: 10px 20px;
             background-color: #16748c;
             color: white;
@@ -78,18 +113,29 @@
 </head>
 <body>
     {% load static %}
-    <div class="header">
-        <div class="logo-container">
-            <img src="{% static 'images/logo2.png' %}" alt="Logo de la Aplicación">
-            <img src="{% static 'images/escudo.png' %}" alt="Escudo del Ayuntamiento">
-            <a href="{% url 'home' %}">CruceDSalas</a>
+    <div class="container">
+        <!-- Header (encabezado) -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="{% static 'images/logo2.png' %}" alt="Logo de la Aplicación">
+                <img src="{% static 'images/escudo.png' %}" alt="Escudo del Ayuntamiento">
+                <a href="{% url 'home' %}">CruceDSalas</a>
+            </div>
+            <div class="auth-status">
+                {% block auth_status %}{% endblock %}
+            </div>
         </div>
-        <div class="auth-status">
-            {% block auth_status %}{% endblock %}
+
+        <!-- Contenido principal de la página -->
+        <div class="main-content">
+            {% block content %}{% endblock %}
         </div>
-    </div>
-    <div class="main-content">
-        {% block content %}{% endblock %}
+
+        <!-- Footer (pie de página) -->
+        <div class="footer">
+            <h2>Pie de página</h2>
+            <p>&copy; 2024 CruceDSalas - Todos los derechos reservados</p>
+        </div>
     </div>
 </body>
 </html>
