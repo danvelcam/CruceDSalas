@@ -3,19 +3,23 @@ from django.contrib.auth.decorators import login_required
 from .models import Sala, Reserva, Valoracion
 from .forms import ReservaForm
 from django.utils import timezone
+from django.contrib import messages
 from datetime import timedelta
 
 
+@login_required
 def lista_salas(request):
     salas = Sala.objects.all()
     return render(request, "rooms/lista_salas.html", {"salas": salas})
 
 
+@login_required
 def reserva_sala(request, sala_id):
     sala = Sala.objects.get(id=sala_id)
     return render(request, "rooms/reserva_sala.html", {"sala": sala})
 
 
+@login_required
 def valorar_experiencia(request):
     if request.method == "POST":
         satisfecho = request.POST.get("valoracion") == "positiva"
@@ -56,6 +60,17 @@ def reserva_sala(request, sala_id):
     )
 
 
+@login_required
 def mis_reservas(request):
     reservas = Reserva.objects.filter(usuario=request.user).order_by("-fecha_creacion")
     return render(request, "rooms/mis_reservas.html", {"reservas": reservas})
+
+
+def cancelar_reserva(request, reserva_id):
+    if request.method == "POST":
+        reserva = get_object_or_404(Reserva, id=reserva_id)
+        if request.user == reserva.usuario:
+            reserva.delete()
+        message = "Reserva cancelada con éxito"
+        messages.success(request, message)
+    return redirect("mis_reservas")

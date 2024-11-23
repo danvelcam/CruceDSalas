@@ -13,6 +13,7 @@
 
 <div class="container">
     <h2>Mis Reservas</h2>
+    {% if reservas %}
     <table class="table">
         <thead>
             <tr>
@@ -31,9 +32,18 @@
                 <td>{{ reserva.hora_inicio|date:"H:i" }}</td>
                 <td>{{ reserva.hora_fin|date:"H:i" }}</td>
                 <td>{{ reserva.estado }}</td>
+                <td>
+                    <form method="post" action="{% url 'cancelar_reserva' reserva.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cancelar</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>No tienes reservas</p>
+    {% endif %}
 </div>
 {% endblock %}
