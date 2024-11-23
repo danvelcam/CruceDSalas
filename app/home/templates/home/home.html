@@ -7,18 +7,13 @@
 {% block content %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .main-content a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #16748c;
-            color: #EBE9E9;
-            text-decoration: none;
-            border-radius: 5px;
+
+        body {
+            font-family: "Segoe UI";
+            background: url("{% static 'images/fondo.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
         }
-        .main-content a:hover {
-            background-color: #145a6e;
-        }
+
         .message {
             position: fixed;
             top: 10px;
@@ -44,6 +39,8 @@
              <div class="message {{ message.tags }}">{{ message }}</div>
          {% endfor %}
      </div>
+
+
      <script>
          $(document).ready(function() {
              setTimeout(function() {
@@ -54,11 +51,15 @@
              }, 2500);
          });
      </script>
+
  {% endif %}
-    <h1>Bienvenido a CruceDSalas</h1>
-    <p>Esta es la página inicial de la aplicación de reservas de salas.</p>
-    <a href="{% url 'register' %}">Regístrate</a>
-    <a href="{% url 'login' %}">Inicia Sesión</a>
+
+    <div class="main-content">
+        <h1>Bienvenido a CruceDSalas</h1>
+        <p>Esta es la página inicial de la aplicación de reservas de salas.</p>
+        <a href="{% url 'register' %}">Regístrate</a>
+        <a href="{% url 'login' %}">Inicia Sesión</a>
+    </div>
 {% endblock %}
 
 {% block auth_status %}

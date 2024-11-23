@@ -6,6 +6,16 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <h1>¡Regístrate para poder reservar salas!</h1>
+
+    <style>
+
+        body {
+            font-family: "Segoe UI";
+            background: url("{% static 'images/fondo.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+
     <div id="error-container" class="message-box error" style="display: none;"></div> 
     <div class="form-container">
         {% if messages %}
