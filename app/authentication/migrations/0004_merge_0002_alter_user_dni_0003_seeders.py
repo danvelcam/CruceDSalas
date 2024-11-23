@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authentication', '0002_alter_user_dni'),
-        ('authentication', '0003_seeders'),
+        ("authentication", "0002_alter_user_dni"),
+        ("authentication", "0003_seeders"),
     ]
 
-    operations = [
-    ]
+    operations = []
