@@ -1,28 +1,94 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="container">
-    <h2 class="text-center mb-4">Salas Disponibles</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for sala in salas %}
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-img-container" style="height: 200px; overflow: hidden;">
-                    {% if sala.imagen %}
-                    <img src="{{ sala.imagen.url }}" class="card-img-top" alt="{{ sala.nombre }}" 
-                         style="width: 100%; height: 100%; object-fit: cover;">
-                    {% endif %}
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-center">{{ sala.nombre }}</h5>
-                    <p class="card-text">{{ sala.descripcion }}</p>
-                    <div class="mt-auto text-center">
-                        <a href="{% url 'reserva_sala' sala.id %}" class="btn btn-primary">Reservar</a>
-                    </div>
+
+<style>
+    body {
+        font-family: "Segoe UI";
+        background: url("{% static 'images/fondo.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .card {
+        border: 1px solid #ddd; /* Añade un borde al cuadro */
+        border-radius: 10px; /* Bordes redondeados */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+        overflow: hidden; /* Asegura que el contenido no se desborde */
+        background-color: #fff; /* Fondo blanco */
+        margin-bottom: 20px;
+    }
+
+    .card-img-container {
+        position: relative; /* Necesario para que la imagen se posicione correctamente */
+        width: 100%;
+        height: 200px; /* Altura fija para todas las imágenes */
+        overflow: hidden; /* Evita que las imágenes más grandes sobresalgan */
+        background-color: #f9f9f9; /* Fondo gris claro alrededor de la imagen */
+    }
+
+    .card-img-container img {
+        position: absolute; /* Asegura que la imagen se ajuste al contenedor */
+        top: 0;
+        left: 0;
+        width: 100%; /* Imagen ocupa todo el ancho */
+        height: 100%; /* Imagen ocupa todo el alto */
+        object-fit: cover; /* Recorta las imágenes para llenar el espacio sin deformarlas */
+        transition: transform 0.3s ease; /* Suaviza la transición de la transformación */
+    }
+
+    .card-img-container:hover img {
+        transform: scale(1.1); /* Amplía la imagen al pasar el cursor */
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #16748c; /* Azul similar al tema del sitio */
+    }
+
+    .card-text {
+        color: #555; /* Texto de la descripción en gris */
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        background-color: #16748c;
+        border-color: #16748c;
+    }
+
+    .btn-primary:hover {
+        background-color: #145a6e;
+        border-color: #145a6e;
+    }
+
+    h2 {
+        color: #16748c;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+</style>
+
+<!-- Eliminar el contenedor adicional -->
+<h2 class="text-center mb-4">Salas Disponibles</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for sala in salas %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-img-container">
+                {% if sala.imagen %}
+                <img src="{{ sala.imagen.url }}" class="card-img-top" alt="{{ sala.nombre }}">
+                {% endif %}
+            </div>
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-center">{{ sala.nombre }}</h5>
+                <p class="card-text">{{ sala.descripcion }}</p>
+                <div class="mt-auto text-center">
+                    <a href="{% url 'reserva_sala' sala.id %}" class="btn btn-primary">Reservar</a>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
+
 {% endblock %}
