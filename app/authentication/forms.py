@@ -4,17 +4,8 @@ from app.authentication.models import User
 
 
 class UserLoginForm(forms.Form):
-    name = forms.CharField(label="Nombre")
-    surname = forms.CharField(label="Apellidos")
     dni = forms.CharField(label="DNI")
-
-    def clean_dni(self):
-        dni = self.cleaned_data.get("dni")
-        if not re.match(r"^\d{8}[A-Z]$", dni):
-            raise forms.ValidationError("El DNI no ha sido ingresado correctamente")
-        if not _check_DNI(dni):
-            raise forms.ValidationError("El DNI no es válido")
-        return dni
+    pin = forms.CharField(label="PIN", widget=forms.PasswordInput)
 
 
 class UserRegisterForm(forms.Form):
@@ -23,9 +14,7 @@ class UserRegisterForm(forms.Form):
     dni = forms.CharField(label="DNI")
     email = forms.EmailField(label="Email")
     tlf = forms.CharField(label="Teléfono")
-    accept_terms = forms.BooleanField(
-        label="Acepto el almacenamiento de mis datos", required=True
-    )
+    pin = forms.CharField(label="PIN", widget=forms.PasswordInput, required=False)
 
     def clean_dni(self):
         dni = self.cleaned_data.get("dni")
@@ -49,6 +38,7 @@ class UserRegisterForm(forms.Form):
             email=data.get("email"),
             dni=data.get("dni"),
             tlf=data.get("tlf"),
+            pin=data.get("pin"),
         )
 
 

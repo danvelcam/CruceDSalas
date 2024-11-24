@@ -2,7 +2,7 @@ name: Python Lint
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, prerelease]
 
 permissions:
   contents: write  
