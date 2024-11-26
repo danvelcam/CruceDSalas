@@ -31,6 +31,20 @@
         .message.error {
             background-color: #D33F49; 
         }
+
+        
+    
+        .responsive-image {
+            display: block;
+            margin: 0 auto 20px; /* Centrado horizontal y separación inferior */
+            max-width: 100%; /* No permite que se desborde del contenedor */
+            height: auto; /* Mantiene las proporciones de la imagen */
+            max-height: 300px; /* Límite de altura máxima */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+        }
+    
+        
     </style>
      {% if messages %}
      <div id="messages">
@@ -54,6 +68,7 @@
  {% endif %}
 
     <div class="main-content">
+        <img src="{% static 'images/Captura.jpg' %}" alt="Logo CruceDSalas" class="responsive-image">
         <h1>Bienvenido a CruceDSalas</h1>
         <p>Esta es la página inicial de la aplicación de reservas de salas.</p>
         <a href="{% url 'register' %}">Regístrate</a>
