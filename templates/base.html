@@ -5,7 +5,7 @@
     <title>{% block title %}CruceDSalas{% endblock %}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Segoe UI", sans-serif;
             background-color: #f0f2f5;
             margin: 0;
             padding: 0;
@@ -113,32 +113,55 @@
             font-size: 14px;
         }
 
-        /* Estilo para la sección de iconos sociales en la derecha */
         .footer-right {
             display: flex;
             justify-content: flex-end;
+            align-items: center;
+            padding-right: 20px;
         }
-
+    
         .footer-social ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
-            gap: 10px;
+            gap: 15px; /* Espacio entre iconos */
         }
-
+    
         .footer-social ul li {
-            display: inline;
+            display: flex;
+            align-items: center;
         }
-
+    
         .footer-social ul li a {
-            color: white;
-            font-size: 18px;
-            text-decoration: none;
+            display: inline-block;
+            width: 35px; /* Tamaño adecuado para los iconos */
+            height: 35px;
+        }
+    
+        .footer-social ul li img {
+            width: 100%; /* Ajustar el tamaño de la imagen al contenedor */
+            height: auto;
+            border-radius: 50%; /* Opcional: hacer los iconos circulares */
+            transition: transform 0.2s, opacity 0.2s;
+        }
+    
+        .footer-social ul li img:hover {
+            transform: scale(1.1); /* Efecto de zoom al pasar el ratón */
+            opacity: 0.8; /* Efecto visual al pasar el ratón */
         }
 
-        .footer-social ul li a:hover {
-            color: #145a6e;
+        .footer-social ul li:nth-child(2) a img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%; /* Asegura que sea un círculo */
+            border: 3px solid white; /* Borde blanco */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .footer-social ul li:nth-child(2) a img:hover {
+            transform: scale(1.1); /* Efecto de ampliación */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
         }
 
         /* Enlaces y botones */
@@ -211,14 +234,21 @@
 
                 <!-- Sección derecha: Iconos de redes sociales -->
                 <div class="footer-right">
-                    <div class="footer-social">
-                        <ul>
-                            <li><a href="https://www.facebook.com/guadalinfovillanuevadelascruces" target="_blank" title="Facebook"><span class="fa fa-facebook"></span></a></li>
-                            <li><a href="http://www.twitter.es/guadacruces" target="_blank" title="Twitter"><span class="fa fa-twitter"></span></a></li>
-                            <!-- Aquí puedes agregar más iconos si es necesario -->
-                        </ul>
-                    </div>
-                </div>
+    <div class="footer-social">
+        <ul>
+            <li>
+                <a href="https://www.facebook.com/guadalinfovillanuevadelascruces" target="_blank" title="Facebook">
+                    <img src="{% static 'images/icono_facebook.png' %}" alt="Icono Facebook">
+                </a>
+            </li>
+            <li>
+                <a href="http://www.twitter.es/guadacruces" target="_blank" title="Twitter">
+                    <img src="{% static 'images/icono_twitter.png' %}" alt="Icono Twitter">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
             </div>
         </div>
     </div>
