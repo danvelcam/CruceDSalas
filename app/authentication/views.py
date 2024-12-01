@@ -31,7 +31,7 @@ def register(request):
                 messages.error(request, f"Ha ocurrido un error: {e}")
     else:
         form = UserRegisterForm()
-    return render(request, "auth/register.html", {"form": form})
+    return render(request, "auth/register2.html", {"form": form})
 
 
 def login_view(request):

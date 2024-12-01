@@ -13,6 +13,9 @@
             height: 100%;
             margin: 0;
             background-image: url("{% static 'images/Captura0000.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             font-family: "Helvetica", sans-serif;
             display: flex;
             flex-direction: column;
@@ -344,6 +347,38 @@
             transform: scale(1.2);
             color: #ffcc00;
         }
+        header .login-btn, header .register-btn {
+        padding: 10px 20px;
+        display: inline-block;
+        color: #EBE9E9;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        background-color: #16748c;
+        font-weight: bold;
+        transition: all 0.3s ease; 
+    }
+
+    header .login-btn:hover, header .register-btn:hover {
+        background-color: #145a6e; 
+        color: #F58A07; 
+        transform: scale(1.1); 
+    }
+
+    header .login-btn::after, header .register-btn::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #F58A07; 
+        transition: width 0.3s ease; 
+    }
+
+    header .login-btn:hover::after, header .register-btn:hover::after {
+        width: 100%; 
+    }
 
         @media (max-width: 768px) {
             .entry-box {
