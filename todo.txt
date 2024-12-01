@@ -1,0 +1,25 @@
+- Modificar el estilo
+- Añadir el boton de cerrar sesion en el header 
+- Añadir un perfil
+- Añadir las difernentes url en el header  mis reservas
+- Los videos
+- Añadir pestaña con los videos de uso 
+    - Registro, Iniciar sesion, Recuperar Contraseña,Realizar reservas, Cancelar reserva, las cosas de admin,
+    verificar las reservas
+- Documentos de las incidencias le damos una vuelta he intentamos hacerlo algo mejor 
+- Mergear los tests
+- Modificar el boton del header de cerrar sesion, que sea una puerta. 
+
+Aspectos de mejora para la presentacion
+- Dia 11 
+    - Se evaluaran el rol tecnico, diseñador, y marketing
+    - Se presentarán al equipo y a los componentes del grupo para diferenciar los los diferentes interesados
+    - Mencionar el ciclo de vida utilizado, enlace al documento anexado 
+    - Método de captura de requisitos siguiendo las pautas de la metologia comentada en la calidad
+    - Mostrar las funcionalidades por roles, o por casos de usos
+    - Capturas de pantalla, o los videos utilizados para la documentacion 
+    - Cambiar el registro de voz para capturar la atencion de los espectadores
+    - Utilizar diferentes camisetas según rol y tal
+    - Diapositiva de comienzo y final, la de final lo que debe tener son los agredecimientods
+    - 1 diapositiva 1 min, aproximadamente 15 diapositivas
+    
