@@ -1,195 +1,22 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}Inicio - CruceDSalas{% endblock %}
+
+
 
 {% block content %}
-<style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        font-family: "Helvetica", sans-serif; /* Change the font family to Helvetica */
-        display: flex;
-        flex-direction: column;
-    }
-
-    .container {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-size: cover;
-    }
-
-    .entry-box {
-        display: flex;
-        width: 80%;
-        max-width: 800px;
-        height: 60%;
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-    }
-
-    .entry-box .left, .entry-box .right {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .entry-box .left img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .entry-box .right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .entry-box .right a {
-        display: block;
-        margin: 10px;
-        padding: 10px 20px;
-        background-color: #16748c;
-        color: #EBE9E9;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-        width: 80%;
-    }
-
-    .entry-box .right a:hover {
-        background-color: #145a6e;
-    }
-
-    footer {
-        background-color: #16748c;
-        color: #EBE9E9;
-        padding: 20px 0;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 14px; /* Adjust the font size as needed */
-        font-family: "Helvetica", sans-serif; /* Change the font family to Helvetica */
-    }
-
-    footer .footer-left {
-        display: flex;
-        align-items: center;
-        margin-left: 10px; /* Reduce the margin */
-    }
-
-    footer .footer-left .images {
-        display: flex;
-        align-items: center;
-    }
-
-    footer .footer-left .images img {
-        height: 35px; /* Adjust the height as needed */
-        margin-right: 10px; /* Reduce the margin */
-    }
-
-    footer .footer-left .text {
-        text-align: justify;
-        font-size: 15px; /* Adjust the font size as needed */
-    }
-
-    .footer-links {
-        margin-left: 10px; /* Reduce the space between footer-left and the links */
-    }
-
-    .footer-links ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: right;
-    }
-
-    .footer-links ul li {
-        display: inline;
-        margin: 0 3px; /* Reduce the margin between list items */
-    }
-
-    .footer-links ul li a {
-        color: #EBE9E9;
-        text-decoration: none;
-    }
-
-    .footer-links ul li a:hover {
-        text-decoration: underline;
-    }
-
-    .social-footer {
-        margin-right: 10px; /* Reduce the margin */
-    }
-
-    .social-footer ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: right;
-    }
-
-    .social-footer ul li {
-        display: inline;
-        margin: 0 3px; /* Reduce the margin between list items */
-    }
-
-    .social-footer ul li a {
-        color: #EBE9E9;
-        text-decoration: none;
-    }
-
-    .social-footer ul li a:hover {
-        text-decoration: underline;
-    }
-</style>
-
 <div class="container">
     <div class="entry-box">
         <div class="left">
             <img src="{% static 'images/Logo_crucedesalasazul.png' %}" alt="Logo CruceDSalas">
         </div>
         <div class="right">
-            <a href="{% url 'register' %}">Regístrate</a>
-            <a href="{% url 'login' %}">Inicia Sesión</a>
+            <div class="content-box">
+                <p class="welcome-text">¡Bienvenido a CruceDSalas! Regístrate para empezar a reservar salas.</p>
+                <a href="/auth/register/">Regístrate</a>
+                <a href="/auth/login/">Inicia Sesión</a>
+            </div>
         </div>
     </div>
 </div>
-
-<footer>
-    <div class="footer-left">
-        <div class="images">
-            <a href="http://www.diphuelva.es" target="_blank">
-                <img src="{% static 'images/diputacion_huelva.png' %}" alt="Diputación de Huelva">
-            </a>
-            <img src="{% static 'images/Logo_crucedesalasblanco.png' %}" alt="CruceDSalas">
-        </div>
-        <div class="text">
-            2015 © Ayuntamiento de Villanueva de las Cruces.<br>
-            Realizado en colaboración con la Diputación de Huelva.
-        </div>
-    </div>
-    <div class="footer-links">
-        <ul class="list-inline no-margin">
-            <li><a title="Ir al Buzón del Ciudadano" href="/es/ayuntamiento/buzon-del-ciudadano/">Contactar</a></li>
-            <li>|</li>
-            <li><a title="Aviso Legal" href="/es/otra-informacion/aviso-legal/">Aviso Legal</a></li>
-            <li>|</li>
-            <li><a title="Política de Privacidad" href="/es/otra-informacion/politica-de-privacidad/">Política de Privacidad</a></li>
-        </ul>
-    </div>
-    <div class="social-footer">
-        <ul class="social-footer list-inline no-margin">
-            <li><a title="Página oficial de Facebook" href="https://www.facebook.com/guadalinfovillanuevadelascruces" target="_blank"> <span class="fa fa-facebook"><span class="sr-only">Icono de Facebook</span></span> </a></li>
-            <li><a title="Página oficial de Twitter" href="http://www.twitter.es/guadacruces" target="_blank"> <span class="fa fa-twitter"><span class="sr-only">Icono de Twitter</span></span></a></li>
-        </ul>
-    </div>
-</footer>
-
 {% endblock %}
