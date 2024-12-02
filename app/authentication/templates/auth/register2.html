@@ -4,183 +4,65 @@
 {% block title %}Registro{% endblock %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
-    <style>
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh; /* Ajusta la altura al 100% del viewport */
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* Caja de formulario */
-        .login-box {
-            width: 500px; /* Aumento el ancho */
-            padding: 30px;
-            border: 2.5px solid #16748c;
-            background-color: #EBE9E9;
-            border-radius: 10px;
-            box-shadow: 0 0 7px #312F2F;
-            font-family: "Helvetica", sans-serif;
-            text-align: center; /* Centra los elementos dentro de la caja */
-        }
-
-        /* Logo dentro del formulario */
-        .login-box img {
-            width: 80px; /* Ajusta el tamaño del logo */
-            margin-bottom: 20px;
-        }
-
-        /* Estilo de los campos de entrada */
-        .login-box .form-field {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 10px;
-            padding-top: 20px; /* Para dejar espacio para la etiqueta */
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            font-family: "Helvetica", sans-serif;
-            transition: 0.3s ease all;
-        }
-
-        /* El label dentro del input */
-        .login-box label {
-            position: absolute;
-            top: 50%;
-            left: 10px;
-            transform: translateY(-50%);
-            font-size: 16px;
-            color: #aaa;
-            transition: 0.3s ease all;
-            pointer-events: none; /* Hace que la etiqueta no interfiera con el campo de texto */
-        }
-
-        /* Cuando el input tiene foco o tiene texto */
-        .login-box input:focus,
-        .login-box input:not(:placeholder-shown) {
-            border-color: #16748c;
-            box-shadow: 0 0 5px rgba(22, 116, 140, 0.5);
-        }
-
-        /* Mueve el label hacia arriba cuando el input tiene foco */
-        .login-box input:focus + label,
-        .login-box input:not(:placeholder-shown) + label {
-            top: 5px;
-            font-size: 12px;
-            color: #16748c;
-            transform: translateY(0); /* Elimina el transform para que el label se mueva hacia arriba */
-        }
-
-        /* Botón de registro */
-        button[type="submit"] {
-            width: 100%;
-            padding: 12px;
-            background-color: #16748c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: "Helvetica", sans-serif;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #145a6e;
-            transform: scale(1.05);
-        }
-
-        /* Mensajes de error */
-        .message-box {
-            width: 500px;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 7px #312F2F;
-            color: white;
-            font-family: "Helvetica", sans-serif;
-        }
-
-        .message-box.error {
-            background-color: #D33F49;
-        }
-
-        .message-box.success {
-            background-color: #28965A;
-        }
-
-        .message-box.warning {
-            background-color: #F58A07;
-        }
-
-        /* Estilo de errores en los campos */
-        .field-error input {
-            border-color: #D33F49;
-        }
-
-        .errorlist {
-            color: #D33F49;
-            font-size: 12px;
-            margin: 5px 0 0;
-            padding: 0;
-            list-style: none;
-        }
-
-    </style>
-    <div id="error-container" class="message-box error" style="display: none;"></div> 
-    <div class="form-container">
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+<div class="form-container">
+    <div class="login-box">
+        <img src="{% static 'images/Logo_crucedesalasazul.png' %}" alt="Logo">
         {% if messages %}
             {% for message in messages %}
-                <div class="message-box {{ message.tags }}">{{ message }}</div>
+                <div id="error-container" class="error-message {{message.tags}}" > {{ message }} </div>
             {% endfor %}
+        {% else %}
+            <div id="error-container" class="error-message"></div>
         {% endif %}
-        <div class="login-box">
-            <!-- Logo dentro de la caja -->
-            <img src="{% static 'images/Logo_crucedesalasazul.png' %}" alt="Logo">
-            <form method="post" onsubmit="return validateForm()">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div class="form-field {% if field.errors %}field-error{% endif %}">
-                        <!-- Campo con etiqueta flotante -->
-                        <div class="input-wrapper">
-                            {{ field }}
-                            {{ field.label_tag }}
-                        </div>
-                        {% if field.errors %}
-                            <ul class="errorlist">
-                                {% for error in field.errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-                <div class="form-field {% if form.repeat_pin.errors %}field-error{% endif %}">
-                    <div class="input-wrapper">
-                        <label for="repeat-pin">Confirme el PIN</label>
-                        <input type="password" name="repeat-pin" id="repeat-pin" required placeholder="Repita su PIN">
-                    </div>
-                    {% if form.repeat_pin.errors %}
+
+        <form method="post" onsubmit="return validateForm();">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name == "pin" %}
+                <div class="form-field {% if field.errors %}field-error{% endif %}">
+                    <input type="password" value="{{ field.value|default:'' }}" 
+                     name="{{ field.html_name }}" id="{{ field.id_for_label }}" placeholder=" " required>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.errors %}
                         <ul class="errorlist">
-                            {% for error in form.repeat_pin.errors %}
+                            {% for error in field.errors %}
                                 <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
                 </div>
-                <button type="submit">Registrarse</button>
-            </form>
-        </div>
-        <script src="{% static 'scripts/registerValidation.js' %}"></script>
+                
+                {% else %}    
+                <div class="form-field {% if field.errors %}field-error{% endif %}">
+                    <input type="{{ field.widget.input_type }}" value="{{ field.value|default:'' }}" 
+                     name="{{ field.html_name }}" id="{{ field.id_for_label }}" placeholder=" " required>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+            <div class="form-field {% if form.repeat_pin.errors %}field-error{% endif %}">
+                <input type="password" name="repeat-pin" id="repeat-pin" placeholder=" " required>
+                <label for="repeat-pin">Confirme el PIN</label>
+                {% if form.repeat_pin.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.repeat_pin.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <button type="submit">Registrarse </button>
+        </form>
     </div>
+</div>
+<script src="{% static 'scripts/registerValidation.js' %}"></script>
+
 {% endblock %}

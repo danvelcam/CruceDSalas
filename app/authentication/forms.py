@@ -5,7 +5,7 @@ from app.authentication.models import User
 
 class UserLoginForm(forms.Form):
     dni = forms.CharField(label="DNI")
-    pin = forms.CharField(label="PIN", widget=forms.PasswordInput)
+    pin = forms.CharField(label="PIN", widget=forms.PasswordInput())
 
 
 class UserRegisterForm(forms.Form):
@@ -14,7 +14,7 @@ class UserRegisterForm(forms.Form):
     dni = forms.CharField(label="DNI")
     email = forms.EmailField(label="Email")
     tlf = forms.CharField(label="Teléfono")
-    pin = forms.CharField(label="PIN", widget=forms.PasswordInput, required=False)
+    pin = forms.CharField(label="PIN", widget=forms.PasswordInput())
 
     def clean_dni(self):
         dni = self.cleaned_data.get("dni")

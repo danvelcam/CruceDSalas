@@ -1,64 +1,101 @@
-.message-box {
-    width: 400px;
-    margin: 20px auto; 
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 7px #312F2F;
-    color: white; 
-}
-
-.message-box.success {
-    background-color: #28965A;
-}
-
-.message-box.warning {
-    background-color: #F58A07;
-}
-
-.message-box.error {
-    background-color: #D33F49;
 }
 
 .login-box {
-    width: 400px;
-    margin: 0 auto;
-    padding: 30px;
+    width: 600px; /* Incrementa el ancho del formulario */
+    padding: 40px; /* Más espacio dentro de la caja */
     border: 2.5px solid #16748c;
     background-color: #EBE9E9;
     border-radius: 10px;
-    box-shadow: 0 0 7px #312F2F;
+    box-shadow: 0 0 10px #312F2F;
+    font-family: "Helvetica", sans-serif;
+    text-align: center
 }
 
-.login-box label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #30292F;
-    text-align: left;
+.login-box img {
+    width: 50px; /* Tamaño del logo */
+    margin-bottom: 10px;
 }
 
-.login-box input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px; 
+/* Estilo de los campos del formulario */
+.form-field {
+    position: relative;
+    margin-bottom: 25px; /* Más espacio entre los campos */
+    padding: 0 10px; /* Margen interno para que no queden al borde */
+}
+
+.form-field input {
+    width: calc(100% - 20px); /* Reduce el ancho para compensar el padding */
+    padding: 12px 12px 12px 25px; /* Espaciado más cómodo */
+    padding-top: 20px; /* Deja espacio para el label flotante */
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px; /* Fuente ligeramente más grande */
+    font-family: "Helvetica", sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-box input:focus {
+.form-field input:focus,
+.form-field input:not(:placeholder-shown) {
     border-color: #16748c;
-    outline: none;
     box-shadow: 0 0 5px rgba(22, 116, 140, 0.5);
 }
 
-.login-box button {
+/* Label flotante */
+.form-field label {
+    position: absolute;
+    top: 50%;
+    left: 25px; /* Alinea con el padding izquierdo del input */
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #aaa;
+    transition: all 0.3s ease;
+    pointer-events: none; /* No bloquea la interacción con el campo */
+}
+
+.form-field input:focus + label,
+.form-field input:not(:placeholder-shown) + label {
+    top: 5px; /* Mueve el label hacia arriba */
+    font-size: 12px;
+    color: #16748c;
+    transform: translateY(0); /* Elimina el desplazamiento */
+}
+
+/* Botón de registro */
+button[type="submit"] {
     width: 100%;
-    padding: 10px;
+    padding: 15px; /* Aumenta el padding */
     background-color: #16748c;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease
+    font-size: 18px; /* Tamaño de fuente más grande */
+    font-family: "Helvetica", sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #145a6e;
+    transform: scale(1.05);
+}
+.error-message {
+color: #D33F49;
+margin-bottom: 20px;
+font-weight: bold;
+height: 24px; 
+display: flex; 
+align-items: center; 
+display: hidden; 
+flex-direction: column;
+}
+.error-message.warning {
+color: #F58A07;
 }

@@ -23,7 +23,7 @@ def register(request):
             try:
                 if User.objects.filter(dni=dni_coded).exists():
                     messages.warning(request, "Ya existe un usuario con ese DNI")
-                    return render(request, "auth/register.html", {"form": form})
+                    return render(request, "auth/register2.html", {"form": form})
                 form.save()
                 messages.success(request, "Usuario creado exitosamente")
                 return redirect("home")
