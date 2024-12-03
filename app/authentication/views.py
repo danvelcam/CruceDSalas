@@ -31,7 +31,7 @@ def register(request):
             form.save()
             return redirect("home")
         except Exception as e:
-                messages.error(request, f"Ha ocurrido un error: {e}")
+            messages.error(request, f"Ha ocurrido un error: {e}")
     else:
         form = UserRegisterForm()
         return render(request, "auth/register2.html", {"form": form})
@@ -52,8 +52,7 @@ def login_view(request):
                 return redirect("lista_salas")
             else:
                 messages.error(request, "Las credenciales introducidas son incorrectas")
-                return render(
-                    request, "auth/login.html", {"form": form})
+                return render(request, "auth/login.html", {"form": form})
     else:
         form = UserLoginForm()
 
