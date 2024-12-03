@@ -1,0 +1,111 @@
+/* Estilo del contenedor principal */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #16748c;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* Estilo para las tarjetas */
+.card {
+    border: 2px solid #16748c; /* Borde más grueso y consistente con el tema */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    overflow: hidden; /* Evita que el contenido se desborde */
+    background-color: #fff; /* Fondo blanco */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 350px; /* Mayor altura para las tarjetas */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Efecto de ampliación al pasar el cursor */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más fuerte al hacer hover */
+}
+
+/* Estilo del contenedor de la imagen */
+.card-img-container {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Altura fija para todas las imágenes */
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.card-img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-img-container:hover img {
+    transform: scale(1.1); /* Efecto de ampliar imagen al pasar el cursor */
+}
+
+/* Título de la tarjeta */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #16748c;
+    margin-bottom: 15px;
+}
+
+/* Descripción de la tarjeta */
+.card-text {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Botón de acción */
+.btn-primary {
+    background-color: #16748c;
+    border-color: #16748c;
+    width: 80%; /* Reduce el tamaño del botón al 80% de la tarjeta */
+    padding: 15px; /* Mayor tamaño del botón */
+    font-size: 18px; /* Mayor tamaño de fuente */
+    font-weight: bold;
+    margin: 0 auto; /* Centra el botón */
+}
+
+.btn-primary:hover {
+    background-color: #145a6e;
+    border-color: #145a6e;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .row-cols-md-3 {
+        row-gap: 30px;
+    }
+
+    /* Ajustar las tarjetas para pantallas más pequeñas */
+    .card {
+        height: auto; /* Permite que la altura de la tarjeta sea flexible en pantallas pequeñas */
+    }
+}
+
+/* Estilo para el footer */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #16748c;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Segoe UI", sans-serif;
+}
+
