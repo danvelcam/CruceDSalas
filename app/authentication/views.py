@@ -17,21 +17,24 @@ def register(request):
         return redirect("home")
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
-        if form.is_valid():
+        try:
+            form.is_valid()
             dni = form.cleaned_data.get("dni")
             dni_coded = encrypt_cbc(dni, key)
-            try:
-                if User.objects.filter(dni=dni_coded).exists():
-                    messages.warning(request, "Ya existe un usuario con ese DNI")
-                    return render(request, "auth/register2.html", {"form": form})
-                form.save()
-                messages.success(request, "Usuario creado exitosamente")
-                return redirect("home")
-            except Exception as e:
+            if User.objects.filter(dni=dni_coded).exists():
+                messages.warning(request, "Ya existe un usuario con ese DNI")
+                return render(request, "auth/register2.html", {"form": form})
+            tlf_coded = encrypt_cbc(form.cleaned_data.get("tlf"), key)
+            if User.objects.filter(tlf=tlf_coded).exists():
+                messages.warning(request, "Ya existe un usuario con ese teléfono")
+                return render(request, "auth/register2.html", {"form": form})
+            form.save()
+            return redirect("home")
+        except Exception as e:
                 messages.error(request, f"Ha ocurrido un error: {e}")
     else:
         form = UserRegisterForm()
-    return render(request, "auth/register2.html", {"form": form})
+        return render(request, "auth/register2.html", {"form": form})
 
 
 def login_view(request):
@@ -48,10 +51,9 @@ def login_view(request):
                 login(request, user)
                 return redirect("lista_salas")
             else:
-                error = "Usuario o contraseña incorrectos"
+                messages.error(request, "Las credenciales introducidas son incorrectas")
                 return render(
-                    request, "auth/login.html", {"form": form, "error": error}
-                )
+                    request, "auth/login.html", {"form": form})
     else:
         form = UserLoginForm()
 

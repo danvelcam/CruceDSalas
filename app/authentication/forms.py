@@ -19,9 +19,9 @@ class UserRegisterForm(forms.Form):
     def clean_dni(self):
         dni = self.cleaned_data.get("dni")
         if not re.match(r"^\d{8}[A-Z]$", dni):
-            raise forms.ValidationError("El DNI no ha sido ingresado correctamente")
+            raise ValueError("El DNI no ha sido ingresado correctamente")
         if not _check_DNI(dni):
-            raise forms.ValidationError("El DNI no es válido")
+            raise ValueError("El DNI no es válido")
         return dni
 
     def clean_email(self) -> str:

@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 <div class="form-container">
     <div class="login-box">
+        <h2>¡Regístrate para empezar a reservar salas!</h2>
+
         <img src="{% static 'images/Logo_crucedesalasazul.png' %}" alt="Logo">
         {% if messages %}
             {% for message in messages %}
@@ -59,6 +61,13 @@
                     </ul>
                 {% endif %}
             </div>
+            <div class="form-field checkbox-field">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">
+                    Acepto la Política de Privacidad y los Términos y Condiciones
+                </label>
+            </div>
+            
             <button type="submit">Registrarse </button>
         </form>
     </div>

@@ -8,8 +8,9 @@
 }
 
 .login-box {
+    margin-top: 6%;
     width: 600px; /* Incrementa el ancho del formulario */
-    padding:15px 40px; /* Más espacio dentro de la caja */
+    padding: 60px 40px; /* Más espacio dentro de la caja */
     border: 2.5px solid #16748c;
     background-color: #EBE9E9;
     border-radius: 10px;
@@ -19,7 +20,7 @@
 }
 
 .login-box img {
-    width: 50px; /* Tamaño del logo */
+    width: 80px; /* Tamaño del logo */
     margin-bottom: 10px;
 }
 
@@ -62,7 +63,7 @@
 .form-field input:focus + label,
 .form-field input:not(:placeholder-shown) + label {
     top: 5px; /* Mueve el label hacia arriba */
-    font-size: 16px;
+    font-size: 12px;
     color: #16748c;
     transform: translateY(0); /* Elimina el desplazamiento */
 }
@@ -99,50 +100,30 @@ flex-direction: column;
 .error-message.warning {
 color: #F58A07;
 }
-/* Contenedor del checkbox */
-.checkbox-field {
-    display: flex;
-    align-items: center; /* Alinea el checkbox con el texto */
-    position: relative;
-    margin-bottom: 25px; /* Alineado con el espacio entre campos */
-    padding: 0 5px; /* Espaciado interno */
+
+
+.btn-secondary {
+    margin-top: 15px;
+    width: 95%;
+    padding: 15px; /* Igual al botón principal */
+    background-color: #16748c; /* Mismo fondo que el botón principal */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde, igual que el botón principal */
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer; /* Indicador de interacción */
+    font-size: 18px; /* Mismo tamaño de fuente */
+    font-family: "Helvetica", sans-serif; /* Mismo estilo de fuente */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrado del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Comportamiento de botón */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animaciones iguales */
 }
 
-/* Estilo del checkbox */
-.checkbox-field input[type="checkbox"] {
-    width: 20px; /* Tamaño del checkbox */
-    height: 20px;
-    margin-right: 20px; /* Espacio entre el checkbox y el texto */
-    border: 1px solid #ccc;
-    border-radius: 3px; /* Bordes ligeramente redondeados */
-    transform: scale(1.2); /* Ajusta el tamaño */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+.btn-secondary:hover {
+    background-color: #145a6e; /* Mismo color de hover */
+    transform: scale(1.05); /* Mismo efecto de escala */
 }
-
-.checkbox-field input[type="checkbox"]:focus {
-    border-color: #16748c;
-    box-shadow: 0 0 5px rgba(22, 116, 140, 0.5);
-}
-
-/* Estilo del label */
-.checkbox-field label {
-    font-size: 20px; /* Tamaño de fuente uniforme */
-    font-family: "Helvetica", sans-serif;
-    color: #333; /* Color de texto */
-    margin-left: 10px; /* Margen entre checkbox y label (opcional redundante con el margin-right de checkbox) */
-}
-
-/* Estilo de los enlaces dentro del label */
-.checkbox-field label a {
-    color: #16748c;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-.checkbox-field label a:hover {
-    text-decoration: underline;
-}
-
 .login-box h2 {
     font-family: "Helvetica", sans-serif; /* Coincide con el resto de la interfaz */
     font-size: 24px; /* Tamaño destacado, pero no demasiado grande */

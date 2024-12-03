@@ -9,13 +9,14 @@
 
 .login-box {
     width: 600px; /* Incrementa el ancho del formulario */
-    padding:15px 40px; /* Más espacio dentro de la caja */
+    padding:20px 40px; /* Más espacio dentro de la caja */
     border: 2.5px solid #16748c;
     background-color: #EBE9E9;
     border-radius: 10px;
     box-shadow: 0 0 10px #312F2F;
     font-family: "Helvetica", sans-serif;
-    text-align: center
+    text-align: center;
+    margin-top: 7.5%;
 }
 
 .login-box img {
@@ -150,4 +151,27 @@ color: #F58A07;
     color: #16748c; /* Mismo color que el borde de la caja */
     margin-bottom: 20px; /* Espacio entre el encabezado y los demás elementos */
     text-align: center; /* Asegura la alineación centrada */
+}
+
+.instructions {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #16748c;
+    font-family: "Helvetica", sans-serif;
+    font-size: 14px;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-left: 17px;
+}
+
+.instructions ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.instructions ul li {
+    margin-bottom: 8px;
 }

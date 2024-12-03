@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ("surname", models.CharField(max_length=50)),
                 ("email", models.EmailField(max_length=254, null=True)),
                 ("dni", models.CharField(max_length=9, unique=True)),
-                ("tlf", models.CharField(max_length=9)),
+                ("tlf", models.CharField(max_length=9, unique=True)),
             ],
             options={
                 "abstract": False,
