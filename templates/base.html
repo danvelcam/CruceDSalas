@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
     <link rel="icon" href="{% static 'images/Logo_crucedesalasblanco.png' %}" type="image/x-icon">
     <title>{% block title %}CruceDSalas{% endblock %}</title>
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             background-image: url("{% static 'images/Captura0000.jpg' %}");
@@ -19,6 +21,7 @@
             font-family: "Helvetica", sans-serif;
             display: flex;
             flex-direction: column;
+            padding-bottom: 15%;
         }
 
         header {
@@ -26,7 +29,7 @@
             color: #EBE9E9;
             padding: 10px 20px;
             display: flex;
-            align-items: center; 
+            align-items: center;
             font-size: 18px;
         }
 
@@ -36,13 +39,13 @@
         }
 
         header .logo img {
-            height: 50px; 
+            height: 50px;
         }
 
         header .title {
             font-size: 20px;
             font-weight: bold;
-            margin-right: 20px; 
+            margin-right: 20px;
         }
 
         header .nav-links {
@@ -52,19 +55,19 @@
         }
 
         header .nav-links a {
-            padding: 10px 20px; 
-            display: inline-block; 
+            padding: 10px 20px;
+            display: inline-block;
             color: #EBE9E9;
             text-decoration: none;
             font-size: 16px;
-            border-radius: 5px; 
-            transition: all 0.3s ease; 
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
         header .nav-links a:hover {
-            background-color: #145a6e; 
-            color: #F58A07; 
-            transform: scale(1.1); 
+            background-color: #145a6e;
+            color: #F58A07;
+            transform: scale(1.1);
         }
 
         header .nav-links a::after {
@@ -74,12 +77,12 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: #F58A07; 
-            transition: width 0.3s ease; 
+            background-color: #F58A07;
+            transition: width 0.3s ease;
         }
 
         header .nav-links a:hover::after {
-            width: 100%; 
+            width: 100%;
         }
 
         .user-status {
@@ -114,8 +117,8 @@
         }
 
         .logout-link {
-            padding: 10px 20px; 
-            display: inline-block; 
+            padding: 10px 20px;
+            display: inline-block;
             color: #EBE9E9;
             text-decoration: none;
             font-size: 16px;
@@ -123,9 +126,9 @@
             border-radius: 5px;
             background-color: transparent;
             border: none;
-            transition: all 0.3s ease; 
-            vertical-align: middle;  
-            cursor: pointer;  
+            transition: all 0.3s ease;
+            vertical-align: middle;
+            cursor: pointer;
         }
 
         .logout-link:hover {
@@ -141,7 +144,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: #F58A07; 
+            background-color: #F58A07;
             transition: width 0.3s ease;
         }
 
@@ -160,17 +163,18 @@
 
         .entry-box {
             display: flex;
-            width: 90%; 
-            max-width: 1000px; 
-            height: 70%; 
+            width: 90%;
+            max-width: 1000px;
+            height: 70%;
             background-color: rgba(255, 255, 255, 0.98);
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            padding: 40px; 
+            padding: 40px;
         }
 
-        .entry-box .left, .entry-box .right {
+        .entry-box .left,
+        .entry-box .right {
             flex: 1;
             display: flex;
             justify-content: center;
@@ -178,7 +182,7 @@
         }
 
         .entry-box .left img {
-            max-width: 80%; 
+            max-width: 80%;
             height: auto;
         }
 
@@ -227,37 +231,37 @@
 
         .welcome-text {
             font-size: 18px;
-            color: #16748c; 
-            margin-bottom: 20px; 
-            text-align: center; 
-            font-weight: bold; 
+            color: #16748c;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
         }
 
         .content-box {
-            border: 2px solid #16748c; 
-            border-radius: 15px; 
-            padding: 20px; 
-            background-color: rgba(255, 255, 255, 0.9); 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
-            text-align: center; 
+            border: 2px solid #16748c;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            text-align: center;
         }
 
         .content-box a {
-            display: inline-block; 
-            margin: 10px 0; 
-            padding: 15px 25px; 
-            background-color: #16748c; 
+            display: inline-block;
+            margin: 10px 0;
+            padding: 15px 25px;
+            background-color: #16748c;
             color: #EBE9E9;
             text-decoration: none;
             border-radius: 5px;
             text-align: center;
-            width: 80%; 
-            max-width: 300px; 
-            transition: transform 0.3s ease, background-color 0.3s ease; 
+            width: 80%;
+            max-width: 300px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .content-box a:hover {
@@ -269,7 +273,7 @@
             background-color: #16748c;
             color: #EBE9E9;
             padding: 20px 0;
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             display: flex;
@@ -347,38 +351,43 @@
             transform: scale(1.2);
             color: #ffcc00;
         }
-        header .login-btn, header .register-btn {
-        padding: 10px 20px;
-        display: inline-block;
-        color: #EBE9E9;
-        text-decoration: none;
-        font-size: 16px;
-        border-radius: 5px;
-        background-color: #16748c;
-        font-weight: bold;
-        transition: all 0.3s ease; 
-    }
 
-    header .login-btn:hover, header .register-btn:hover {
-        background-color: #145a6e; 
-        color: #F58A07; 
-        transform: scale(1.1); 
-    }
+        header .login-btn,
+        header .register-btn {
+            padding: 10px 20px;
+            display: inline-block;
+            color: #EBE9E9;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #16748c;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
 
-    header .login-btn::after, header .register-btn::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 2px;
-        background-color: #F58A07; 
-        transition: width 0.3s ease; 
-    }
+        header .login-btn:hover,
+        header .register-btn:hover {
+            background-color: #145a6e;
+            color: #F58A07;
+            transform: scale(1.1);
+        }
 
-    header .login-btn:hover::after, header .register-btn:hover::after {
-        width: 100%; 
-    }
+        header .login-btn::after,
+        header .register-btn::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #F58A07;
+            transition: width 0.3s ease;
+        }
+
+        header .login-btn:hover::after,
+        header .register-btn:hover::after {
+            width: 100%;
+        }
 
         @media (max-width: 768px) {
             .entry-box {
@@ -386,7 +395,9 @@
                 height: auto;
             }
 
-            .footer-left, .footer-links, .social-footer {
+            .footer-left,
+            .footer-links,
+            .social-footer {
                 flex-direction: column;
                 align-items: center;
                 margin: 10px 0;
@@ -414,11 +425,50 @@
             }
 
             header .logo {
-                margin-bottom: 10px; 
+                margin-bottom: 10px;
             }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #16748c;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 4px;
+            margin-top: 0px;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #135e71;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-trigger {
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -429,23 +479,34 @@
             <a href="{% url 'home' %}">Inicio</a>
             <a href="{% url 'lista_salas' %}">Salas</a>
             <a href="{% url 'mis_reservas' %}">Mis Reservas</a>
-            <a href="{% url 'home' %}">Guía de Uso</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-trigger">Guía de Uso</a>
+                <div class="dropdown-content">
+                    <a href="https://www.youtube.com/watch?v=VRONRAuXouM" target="_blank">Cómo registrarse</a>
+                    <a href="https://www.youtube.com/watch?v=lXPCv7G0Uco" target="_blank">Cómo iniciar sesión</a>
+                    <a href="https://www.youtube.com/watch?v=m2AwkpfII7c" target="_blank">Cómo hacer una reserva</a>
+                    <a href="https://www.youtube.com/watch?v=LWzhbAVLr5A" target="_blank">Cómo ver y gestionar mis
+                        reservas</a>
+                    <a href="https://www.youtube.com/watch?v=CnqoZGKSFdw" target="_blank">Cómo recuperar mi
+                        contraseña</a>
+                </div>
+            </div>
         </div>
         <div class="user-status">
             {% if user.is_authenticated %}
-                <div class="user-info">
-                    <span class="user-greeting">Hola, {{ user.name }}!</span>
-                </div>
-                <a href="{% url 'home' %}" class="profile-link">Perfil</a>
-                <form action="{% url 'logout' %}" method="POST" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-link">
-                        Cerrar sesión
-                    </button>
-                </form>
+            <div class="user-info">
+                <span class="user-greeting">Hola, {{ user.name }}!</span>
+            </div>
+            <a href="{% url 'home' %}" class="profile-link">Perfil</a>
+            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">
+                    Cerrar sesión
+                </button>
+            </form>
             {% else %}
-                <a href="/auth/login/" class="login-btn">Iniciar sesión</a>
-                <a href="/auth/register/" class="register-btn">Registrarse</a>
+            <a href="/auth/login/" class="login-btn">Iniciar sesión</a>
+            <a href="/auth/register/" class="register-btn">Registrarse</a>
             {% endif %}
         </div>
     </header>
@@ -467,19 +528,24 @@
         </div>
         <div class="footer-links">
             <ul>
-                <li><a href="/es/ayuntamiento/buzon-del-ciudadano/">Contactar</a></li>
+                <li><a href="https://www.villanuevadelascruces.es/es/ayuntamiento/buzon-del-ciudadano/">Contactar</a>
+                </li>
                 <li><span>|</span></li>
-                <li><a href="/es/otra-informacion/aviso-legal/">Aviso Legal</a></li>
+                <li><a href="https://www.villanuevadelascruces.es/es/otra-informacion/aviso-legal/">Aviso Legal</a></li>
                 <li><span>|</span></li>
-                <li><a href="/es/otra-informacion/politica-de-privacidad/">Política de Privacidad</a></li>
+                <li><a href="https://www.villanuevadelascruces.es/es/otra-informacion/politica-de-privacidad/">Política
+                        de Privacidad</a></li>
             </ul>
         </div>
         <div class="social-footer">
             <ul>
-                <li><a href="https://www.facebook.com/villanuevadelascrucesandevalo/?locale=es_LA" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color: white;"></i></a></li>
-                <li><a href="http://www.twitter.es/guadacruces" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter" style="color: white;"></i></a></li>
+                <li><a href="https://www.facebook.com/villanuevadelascrucesandevalo/?locale=es_LA" target="_blank"
+                        aria-label="Facebook"><i class="fa-brands fa-facebook" style="color: white;"></i></a></li>
+                <li><a href="https://x.com/lascrucesvuela" target="_blank" aria-label="X"><i class="fa-brands fa-x"
+                            style="color: white;"></i></a></li>
             </ul>
         </div>
     </footer>
 </body>
+
 </html>
