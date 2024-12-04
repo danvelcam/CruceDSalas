@@ -94,10 +94,12 @@
                 <td>{{ reserva.hora_fin|date:"H:i" }}</td>
                 <td>{{ reserva.estado }}</td>
                 <td>
+                    {% if reserva.estado == "PENDIENTE" %}
                     <form method="post" action="{% url 'cancelar_reserva' reserva.id %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Cancelar</button>
                     </form>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

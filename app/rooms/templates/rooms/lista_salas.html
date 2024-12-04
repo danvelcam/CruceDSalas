@@ -3,12 +3,6 @@
 {% block content %}
 
 <style>
-
-    body {
-        font-family: "Segoe UI";
-        background-size: cover;
-    }
-
     .card {
         border: 1px solid #ddd; /* Añade un borde al cuadro */
         border-radius: 10px; /* Bordes redondeados */
@@ -16,6 +10,7 @@
         overflow: hidden; /* Asegura que el contenido no se desborde */
         background-color: #fff; /* Fondo blanco */
         margin-bottom: 20px;
+        min-height: 400px; /* Altura mínima aumentada */
     }
 
     .card-img-container {
@@ -44,30 +39,48 @@
         font-size: 1.25rem;
         font-weight: bold;
         color: #16748c; /* Azul similar al tema del sitio */
+        margin-bottom: 10px; /* Reduce el espacio inferior */
     }
 
     .card-text {
         color: #555; /* Texto de la descripción en gris */
         font-size: 0.95rem;
+        margin-bottom: 30px; /* Añadida separación extra entre descripción y botón */
     }
 
-    .btn-primary {
+    .card-body {
+        text-align: center; /* Centra el texto dentro de la tarjeta */
+    }
+
+    /* Botón estilizado */
+    .card .btn-primary {
+        width: 100%;
+        padding: 15px; /* Aumenta el padding */
         background-color: #16748c;
-        border-color: #16748c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px; /* Tamaño de fuente más grande */
+        font-family: "Helvetica", sans-serif;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Agregado box-shadow */
+        margin-top: 15px; /* Añade margen superior */
     }
 
-    .btn-primary:hover {
+    .card .btn-primary:hover {
         background-color: #145a6e;
-        border-color: #145a6e;
+        transform: scale(1.1); /* Suaviza la ampliación */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Agrega sombra durante hover */
     }
 
+    /* Encabezado principal */
     h2 {
         color: #16748c;
         margin-bottom: 20px;
         text-align: center;
     }
 </style>
-
 
 <h2 class="text-center mb-4">Salas Disponibles</h2>
 <div class="row row-cols-1 row-cols-md-3 g-4">
