@@ -42,29 +42,40 @@ class RoomsTests(TestCase):
         """Prueba la lista de salas."""
         response = self.client.get(reverse("lista_salas"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Sala de reuniones")  # Verifica la sala en la lista
+        self.assertContains(
+            response, "Sala de reuniones"
+        )  # Verifica la sala en la lista
 
     def test_reserva_sala_get(self):
         """Prueba el acceso al formulario de reserva de sala."""
         response = self.client.get(reverse("reserva_sala", args=[self.sala.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Reservar Sala de reuniones")  # Verifica el formulario
+        self.assertContains(
+            response, "Reservar Sala de reuniones"
+        )  # Verifica el formulario
 
     def test_reserva_sala_post(self):
         """Prueba la creación de una reserva."""
         fecha = timezone.now().date()
-        response = self.client.post(reverse("reserva_sala", args=[self.sala.id]), {
-            "fecha": fecha,
-            "hora_inicio": "10:00",
-            "hora_fin": "11:00",
-            "asunto": "Reunión semanal",
-        })
+        response = self.client.post(
+            reverse("reserva_sala", args=[self.sala.id]),
+            {
+                "fecha": fecha,
+                "hora_inicio": "10:00",
+                "hora_fin": "11:00",
+                "asunto": "Reunión semanal",
+            },
+        )
         self.assertEqual(response.status_code, 302)  # Redirige tras la reserva
-        self.assertTrue(Reserva.objects.filter(usuario=self.user, sala=self.sala).exists())
+        self.assertTrue(
+            Reserva.objects.filter(usuario=self.user, sala=self.sala).exists()
+        )
 
     def test_valorar_experiencia(self):
         """Prueba valorar una experiencia."""
-        response = self.client.post(reverse("valorar_experiencia"), {"valoracion": "positiva"})
+        response = self.client.post(
+            reverse("valorar_experiencia"), {"valoracion": "positiva"}
+        )
         self.assertEqual(response.status_code, 302)  # Redirige tras valorar
         self.assertTrue(Valoracion.objects.filter(satisfecho=True).exists())
 

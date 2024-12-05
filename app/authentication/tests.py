@@ -52,13 +52,17 @@ class UserTests(TestCase):
 
     def test_user_login_valid(self):
         """Prueba el inicio de sesión con credenciales válidas."""
-        response = self.client.post(reverse("login"), {"dni": self.dni, "pin": self.pin})
+        response = self.client.post(
+            reverse("login"), {"dni": self.dni, "pin": self.pin}
+        )
         self.assertEqual(response.status_code, 302)  # Redirige después del login
         self.assertTrue(response.wsgi_request.user.is_authenticated)
 
     def test_user_login_invalid(self):
         """Prueba el inicio de sesión con credenciales inválidas."""
-        response = self.client.post(reverse("login"), {"dni": "wrongdni", "pin": "wrongpin"})
+        response = self.client.post(
+            reverse("login"), {"dni": "wrongdni", "pin": "wrongpin"}
+        )
         self.assertEqual(response.status_code, 200)  # Se queda en la página de login
         self.assertFalse(response.wsgi_request.user.is_authenticated)
 
@@ -68,4 +72,3 @@ class UserTests(TestCase):
         response = self.client.post(reverse("logout"))
         self.assertEqual(response.status_code, 302)  # Redirige a 'home'
         self.assertFalse(response.wsgi_request.user.is_authenticated)
-
